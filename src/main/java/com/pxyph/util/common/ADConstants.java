@@ -1,0 +1,34 @@
+package com.pxyph.util.common;
+
+public class ADConstants {
+	
+	// 数据库表常量
+	public static final String USERTABLE = "user_inf";
+	public static final String DEFAULTSETTING = "default_setting";
+	public static final String VIDEOINFO = "video_info";
+	public static final String SYSSETTING = "sys_setting";
+	public static final String LOGINFO = "log_info";
+	public static final String STORAGEMANAGER = "storage_manager";
+	public static final String ABNORMALINFO = "abnormal_info";
+
+	//视频存储路径
+	public static final String VIDEOPATH = "D:\\IdeaProjects\\AbnormalDetection\\video";
+	//模型存储路径
+	public static final String MODELPATH = "D:\\IdeaProjects\\AbnormalDetection\\model";
+	//存储设置的id
+	public static final String SETTINGID = "settingId";
+
+
+	// 登录
+	public static final String LOGIN = "loginForm";
+	// 用户的session对象
+	public static final String USER_SESSION = "user_session";
+	// 默认设置的session对象
+	public static final String DEFAULTSETTING_SESSION = "default_session";
+
+	// 默认每页4条数据
+	public static int PAGE_DEFAULT_SIZE = 10;
+	
+	
+	
+}
