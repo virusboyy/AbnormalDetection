@@ -50,7 +50,7 @@
                     /** 得到用户选中的所有的需要删除的ids */
                     var ids = checkedBoxs.map(function () {
                         return this.value;
-                    })
+                    });
 
                     $.ligerDialog.confirm("确认要删除吗?", "删除存储信息", function (r) {
                         if (r) {
@@ -61,6 +61,13 @@
                     });
                 }
             })
+
+            $("#preview_storageManager").click(function() {
+                var filename12 = document.getElementById("preview_storageManager").value;
+                var src = "/video/"+filename12;
+                // alert(src);
+                document.getElementById("video_storageManager").src=src;
+            });
         })
     </script>
 
@@ -134,7 +141,7 @@
                                     <td><input type="checkbox" id="box_${stat.index}" value="${storageInfo.id}"></td>
                                     <td>${storageInfo.id }</td>
                                     <td>${storageInfo.video_id }</td>
-                                    <td>${storageInfo.file_name }</td>
+                                    <td><input id="preview_storageManager" type="button" value="${storageInfo.file_name }"/></td>
                                     <td>${storageInfo.file_size }</td>
                                     <td>${storageInfo.video_width }</td>
                                     <td>${storageInfo.video_height }</td>
@@ -173,9 +180,10 @@
                 <tr class="main_trbg_tit" align="center">
                     <th height="100%">
                         <%--loop="true" autoplay="autoplay"  循环自动播放--%>
-                        <video id="video2" width="400" height="400" muted="true" loop="true" autoplay="autoplay">
+                        <video id="video_storageManager" width="400" height="400" muted="true" loop="true" autoplay="autoplay">
                             <source src="/i/movie.ogg" type="video/ogg"/>
-                            <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4"/>
+                            <%--<source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4"/>--%>
+                            <source src="" type="video/mp4"/>
                         </video>
                     </th>
                 </tr>

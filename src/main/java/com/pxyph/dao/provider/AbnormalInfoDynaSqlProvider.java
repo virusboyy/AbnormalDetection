@@ -75,6 +75,9 @@ public class AbnormalInfoDynaSqlProvider {
                 if (abnormalInfo.getVideo_id() != null && !abnormalInfo.getVideo_id().equals("")) {
                     VALUES("video_id", "#{video_id}");
                 }
+                if (abnormalInfo.getVideo_name() != null && !abnormalInfo.getVideo_name().equals("")) {
+                    VALUES("video_name", "#{video_name}");
+                }
                 if (abnormalInfo.getVideo_path() != null && !abnormalInfo.getVideo_path().equals("")) {
                     VALUES("video_path", "#{video_path}");
                 }

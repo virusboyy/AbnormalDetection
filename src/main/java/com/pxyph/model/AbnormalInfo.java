@@ -17,13 +17,13 @@ public class AbnormalInfo implements Serializable {
     private BigInteger start_time;
     private BigInteger end_time;
     private String video_id;
+    private String video_name;
     private String video_path;
     private String username;
 
     public AbnormalInfo() {
         super();
     }
-
 
 
     @Override
@@ -36,6 +36,7 @@ public class AbnormalInfo implements Serializable {
                 ", start_time=" + start_time +
                 ", end_time=" + end_time +
                 ", video_id='" + video_id + '\'' +
+                ", video_name='" + video_name + '\'' +
                 ", video_path='" + video_path + '\'' +
                 ", username='" + username + '\'' +
                 '}';
@@ -98,6 +99,14 @@ public class AbnormalInfo implements Serializable {
 
     public void setVideo_id(String video_id) {
         this.video_id = video_id;
+    }
+
+    public String getVideo_name() {
+        return video_name;
+    }
+
+    public void setVideo_name(String video_name) {
+        this.video_name = video_name;
     }
 
     public String getVideo_path() {

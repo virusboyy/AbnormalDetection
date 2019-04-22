@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
@@ -207,7 +206,7 @@ public class AbnormalInfoController {
      * @param abnormalInfo 要添加的信息对象
      */
     @RequestMapping(value = "/abnormalInfo/addAbnormalInfo")
-    public String addStorageInfo(
+    public String addAbnormalInfo(
             @ModelAttribute AbnormalInfo abnormalInfo,
             HttpSession session,
             HttpServletRequest request) throws Exception {
@@ -215,18 +214,20 @@ public class AbnormalInfoController {
         String event_type = request.getParameter("event_type");
         BigInteger start_time = new BigInteger(request.getParameter("start_time"));
         BigInteger end_time = new BigInteger(request.getParameter("end_time"));
-        String settingId = null;
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie:cookies){
-            if (cookie.getName().equals(SETTINGID)){
-                settingId = cookie.getValue();
-            }
-        }
+        //String settingId = null;
+        //Cookie[] cookies = request.getCookies();
+        //for (Cookie cookie:cookies){
+        //    if (cookie.getName().equals(SETTINGID)){
+        //        settingId = cookie.getValue();
+        //    }
+        //}
+        String settingId = (String) session.getAttribute(SETTINGID);
         SysSetting sysSetting = adService.findSysSettingById(Integer.parseInt(settingId));
         String video_path = sysSetting.getSave_path();
+        String video_name = sysSetting.getVideo();
 
         //通过以上信息构建说明文档
-        String anomaly_document = "在"+start_time+"微秒到"+end_time+"微秒之间出现了"+event_type+"情况";
+        String anomaly_document = "视频"+video_name+"在"+start_time+"微秒到"+end_time+"微秒之间出现了"+event_type+"情况";
 
         //将信息添加到abnormalInfo中
         abnormalInfo.setEvent_type(event_type);
@@ -235,6 +236,7 @@ public class AbnormalInfoController {
         abnormalInfo.setStart_time(start_time);
         abnormalInfo.setEnd_time(end_time);
         abnormalInfo.setVideo_id(video_id);
+        abnormalInfo.setVideo_name(video_name);
         abnormalInfo.setVideo_path(video_path);
 
         //添加用户信息

@@ -62,6 +62,13 @@
                     });
                 }
             })
+
+            $("#preview_abnormal").click(function() {
+                var filename12 = document.getElementById("preview_abnormal").value;
+                var src = "/video/"+filename12;
+                // alert(src);
+                document.getElementById("video_abnomal").src=src;
+            });
         })
     </script>
 
@@ -125,8 +132,8 @@
                                 <td>说明文档</td>
                                 <td>开始时间</td>
                                 <td>结束时间</td>
-                                <td>异常视频id</td>
-                                <td>视频路径</td>
+                                <td>异常视频</td>
+                                <%--<td>视频路径</td>--%>
                                 <td>用户</td>
                                 <td align="center">操作</td>
                             </tr>
@@ -140,8 +147,8 @@
                                     <td>${abnormalInfo.anomaly_document }</td>
                                     <td>${abnormalInfo.start_time }微秒</td>
                                     <td>${abnormalInfo.end_time }微秒</td>
-                                    <td>${abnormalInfo.video_id }</td>
-                                    <td>${abnormalInfo.video_path }</td>
+                                    <td><input id="preview_abnormal" type="button" value="${abnormalInfo.video_name }"/></td>
+                                    <%--<td>${abnormalInfo.video_path }</td>--%>
                                     <td>${abnormalInfo.username}</td>
                                     <td align="center" width="40px;"><a
                                             href="${ctx}/abnormalInfo/updateAbnormalInfo?flag=1&id=${abnormalInfo.id}">
@@ -174,9 +181,10 @@
                 <tr class="main_trbg_tit" align="center">
                     <th height="100%">
                         <%--loop="true" autoplay="autoplay"  循环自动播放--%>
-                        <video id="video2" width="400" height="400" muted="true" loop="true" autoplay="autoplay">
+                        <video id="video_abnomal" width="400" height="400" muted="true" loop="true" autoplay="autoplay">
                             <source src="/i/movie.ogg" type="video/ogg"/>
-                            <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4"/>
+                            <%--<source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4"/>--%>
+                            <source src="" type="video/mp4"/>
                         </video>
                     </th>
                 </tr>

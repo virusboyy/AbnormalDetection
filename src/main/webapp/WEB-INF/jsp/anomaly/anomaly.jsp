@@ -27,7 +27,7 @@
         //自动加载视频
         function myfun() {
             var src = "${url}";
-            alert(src);
+            // alert(src);
             document.getElementById("video1").src=src;
         }
         window.onload = myfun;
@@ -167,9 +167,9 @@
                 <tr class="main_trbg_tit" align="center">
                     <th height="100%">
                         <%--loop="true" autoplay="autoplay"  循环自动播放--%>
-                        <video id="video2" width="400" height="400" muted="true">
+                        <video id="video2" width="400" height="400" muted="true" loop="true" autoplay="autoplay">
                             <source src="/i/movie.ogg" type="video/ogg"/>
-                            <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4"/>
+                            <source src="/video/1.mp4" type="video/mp4"/>
                         </video>
                     </th>
                 </tr>
