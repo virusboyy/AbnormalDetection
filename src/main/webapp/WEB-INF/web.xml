@@ -50,7 +50,6 @@
     </servlet-mapping>
 
 
-
     <!-- jsp的配置 -->
     <jsp-config>
         <jsp-property-group>

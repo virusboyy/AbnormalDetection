@@ -39,6 +39,9 @@
     <mvc:resources location="/css/" mapping="/css/**"/>
     <mvc:resources location="/js/" mapping="/js/**"/>
     <mvc:resources location="/images/" mapping="/images/**"/>
+    <mvc:resources location="/video/" mapping="/video/**"/>
+    <mvc:resources location="/model/" mapping="/model/**"/>
+    <mvc:resources location="/My97DatePicker/" mapping="/My97DatePicker/**"/>
 
     <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
     <bean id="mappingJackson2HttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">

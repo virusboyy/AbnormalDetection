@@ -186,19 +186,23 @@ public class SysSettingController {
      *
      * @param id       需要的id字符串
      * @param mv
-     * @param response
+     * @param
      */
     @RequestMapping(value = "/setting/getSetting")
     public ModelAndView getSysSetting(
             String id,
             ModelAndView mv,
-            HttpServletResponse response) {
+            HttpSession session) throws Exception {
         //创建Cookie对象
-        Cookie cookie = new Cookie(SETTINGID, id.toString());
-        //设定cookie的最大有效时间
-        cookie.setMaxAge(60 * 60 * 24);
-        //将cookie信息发送给浏览器
-        response.addCookie(cookie);
+        //Cookie cookie = new Cookie(SETTINGID, id.toString());
+        //Cookie cookie = new Cookie(URLEncoder.encode(SETTINGID,CharEncoding.UTF_8), URLEncoder.encode(id.toString(),CharEncoding.UTF_8));
+        ////设定cookie的最大有效时间
+        //cookie.setMaxAge(60 * 60 * 24);
+        ////cookie.setHttpOnly(true);
+        ////将cookie信息发送给浏览器
+        //response.addCookie(cookie);
+
+        session.setAttribute(SETTINGID,id.toString());
         // 设置客户端跳转到查询请求
         mv.setViewName("redirect:/setting/searchSysSettingsByKeys");
         // 返回ModelAndView

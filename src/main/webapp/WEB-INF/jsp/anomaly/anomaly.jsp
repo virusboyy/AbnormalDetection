@@ -23,6 +23,16 @@
     <script src="${ctx}/js/ligerUI/js/plugins/ligerResizable.jss" type="text/javascript"></script>
     <link href="${ctx}/css/pager.css" type="text/css" rel="stylesheet"/>
     <script type="text/javascript">
+
+        //自动加载视频
+        function myfun() {
+            var src = "${url}";
+            alert(src);
+            document.getElementById("video1").src=src;
+        }
+        window.onload = myfun;
+
+
         $(function () {
 
             //日志信息
@@ -128,10 +138,17 @@
             <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
                 <tr class="main_trbg_tit" align="center" valign="top">
                     <th width="100%" height="80">
-                        <%--muted="true" 设置默认为静音--%>
-                        <video width="600" height="400" id="video1" muted="true">
-                            <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4"/>
-                        </video>
+                        <div id="video-box">
+                            <%--muted="true" 设置默认为静音--%>
+                            <video width="600" height="400" id="video1" muted="true">
+                                <%--<source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4"/>--%>
+                                <source src="" type="video/mp4"/>
+                            </video>
+
+                            <%--<video style="object-fit: fill;width: 200px;height: 50px;" controls>--%>
+                            <%--<source src="">--%>
+                            <%--</video>--%>
+                        </div>
                     </th>
                 </tr>
                 <tr valign="bottom">
