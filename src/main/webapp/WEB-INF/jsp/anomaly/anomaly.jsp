@@ -34,23 +34,26 @@
 
 
         $(function () {
+            setInterval(aa,1000);
+            function aa() {
+                $.post("${ctx }/log/refreshLogs", function (data) {
+                    $("#log_info_tr").siblings().empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $("#log_info_tr2").before("" +
+                            "<tr align='center' class='main_trbg'>" +
+                            "<td>" + data[i].id + "</td>" +
+                            "<td>" + data[i].event_type + "</td>" +
+                            "<td>" + data[i].create_time + "</td>" +
+                            "<td>" + data[i].log_document + "</td>" +
+                            "</tr>");
+                    }
+                });
+            }
 
             //日志信息
             var myVideo = document.getElementById("video1");
             $("#startBut").click(function () {
-
-                    $.post("${ctx }/log/play", {currentTime: myVideo.currentTime, tag: "开始"}, function (data) {
-                        $("#log_info_tr").siblings().empty();
-                        for (var i = 0; i < data.length; i++) {
-                            $("#log_info_tr2").before("" +
-                                "<tr align='center' class='main_trbg'>" +
-                                "<td>" + data[i].id + "</td>" +
-                                "<td>" + data[i].event_type + "</td>" +
-                                "<td>" + data[i].create_time + "</td>" +
-                                "<td>" + data[i].log_document + "</td>" +
-                                "</tr>");
-                        }
-                    });
+                    $.post("${ctx }/log/play", {currentTime: myVideo.currentTime, tag: "开始"});
                     myVideo.play();
                 }
             );
@@ -59,36 +62,14 @@
             $("#pauseBut").click(
                 function () {
 
-                    $.post("${ctx }/log/play", {currentTime: myVideo.currentTime, tag: "暂停"}, function (data) {
-                        $("#log_info_tr").siblings().empty();
-                        for (var i = 0; i < data.length; i++) {
-                            $("#log_info_tr2").before("" +
-                                "<tr align='center' class='main_trbg'>" +
-                                "<td>" + data[i].id + "</td>" +
-                                "<td>" + data[i].event_type + "</td>" +
-                                "<td>" + data[i].create_time + "</td>" +
-                                "<td>" + data[i].log_document + "</td>" +
-                                "</tr>");
-                        }
-                    });
+                    $.post("${ctx }/log/play", {currentTime: myVideo.currentTime, tag: "暂停"});
                     myVideo.pause();
                 }
             )
             $("#stopBut").click(
                 function () {
 
-                    $.post("${ctx }/log/play", {currentTime: myVideo.currentTime, tag: "停止"}, function (data) {
-                        $("#log_info_tr").siblings().empty();
-                        for (var i = 0; i < data.length; i++) {
-                            $("#log_info_tr2").before("" +
-                                "<tr align='center' class='main_trbg'>" +
-                                "<td>" + data[i].id + "</td>" +
-                                "<td>" + data[i].event_type + "</td>" +
-                                "<td>" + data[i].create_time + "</td>" +
-                                "<td>" + data[i].log_document + "</td>" +
-                                "</tr>");
-                        }
-                    });
+                    $.post("${ctx }/log/play", {currentTime: myVideo.currentTime, tag: "停止"});
                     myVideo.load();
                 }
             )
@@ -96,18 +77,7 @@
             $("#continueBut").click(
                 function () {
 
-                    $.post("${ctx }/log/play", {currentTime: myVideo.currentTime, tag: "继续"}, function (data) {
-                        $("#log_info_tr").siblings().empty();
-                        for (var i = 0; i < data.length; i++) {
-                            $("#log_info_tr2").before("" +
-                                "<tr align='center' class='main_trbg'>" +
-                                "<td>" + data[i].id + "</td>" +
-                                "<td>" + data[i].event_type + "</td>" +
-                                "<td>" + data[i].create_time + "</td>" +
-                                "<td>" + data[i].log_document + "</td>" +
-                                "</tr>");
-                        }
-                    });
+                    $.post("${ctx }/log/play", {currentTime: myVideo.currentTime, tag: "继续"});
                     myVideo.play();
                 }
             )
@@ -167,7 +137,7 @@
                 <tr class="main_trbg_tit" align="center">
                     <th height="100%">
                         <%--loop="true" autoplay="autoplay"  循环自动播放--%>
-                        <video id="video2" width="400" height="400" muted="true" loop="true" autoplay="autoplay">
+                        <video id="video2" width="400" height="400" muted="true">
                             <source src="/i/movie.ogg" type="video/ogg"/>
                             <source src="/video/1.mp4" type="video/mp4"/>
                         </video>

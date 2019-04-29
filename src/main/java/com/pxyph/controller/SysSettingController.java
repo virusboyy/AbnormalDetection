@@ -189,7 +189,7 @@ public class SysSettingController {
      * @param
      */
     @RequestMapping(value = "/setting/getSetting")
-    public ModelAndView getSysSetting(
+    public ModelAndView setSysSetting(
             String id,
             ModelAndView mv,
             HttpSession session) throws Exception {
@@ -217,7 +217,7 @@ public class SysSettingController {
      * @param response
      */
     @RequestMapping(value = "/setting/defaultSetting")
-    public ModelAndView getDefaultSetting(
+    public ModelAndView setDefaultSetting(
             String id,
             ModelAndView mv,
             HttpServletResponse response) {

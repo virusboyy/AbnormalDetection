@@ -16,7 +16,7 @@
     <mvc:annotation-driven/>
 
     <!-- 使用默认的Servlet来响应静态文件 -->
-    <mvc:default-servlet-handler/>
+    <!--<mvc:default-servlet-handler/>-->
 
 
     <!-- 定义Spring MVC的拦截器 -->
