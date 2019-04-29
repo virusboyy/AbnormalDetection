@@ -70,13 +70,13 @@ public class StorageInfoDynaSqlProvider {
                     VALUES("file_name", "#{file_name}");
                 }
                 VALUES("file_size","#{file_size}");
-                VALUES("video_width","video_width");
-                VALUES("video_height","video_height");
+                VALUES("video_width","#{video_width}");
+                VALUES("video_height","#{video_height}");
                 if (storageManager.getCreate_time() !=null) {
                     VALUES("create_time", "#{create_time}");
                 }
-                VALUES("frame_num","frame_num");
-                VALUES("fps","fps");
+                VALUES("frame_num","#{frame_num}");
+                VALUES("fps","#{fps}");
                 if (storageManager.getUsername() != null && !storageManager.getUsername().equals("")) {
                     VALUES("username", "#{username}");
                 }

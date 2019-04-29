@@ -63,10 +63,10 @@
                 }
             })
 
-            $("#preview_abnormal").click(function() {
+            $("#preview_abnormal_").click(function() {
                 var filename12 = document.getElementById("preview_abnormal").value;
                 var src = "/video/"+filename12;
-                // alert(src);
+                alert(src);
                 document.getElementById("video_abnomal").src=src;
             });
         })
@@ -147,7 +147,7 @@
                                     <td>${abnormalInfo.anomaly_document }</td>
                                     <td>${abnormalInfo.start_time }微秒</td>
                                     <td>${abnormalInfo.end_time }微秒</td>
-                                    <td><input id="preview_abnormal" type="button" value="${abnormalInfo.video_name }"/></td>
+                                    <td><input id="preview_abnormal_${stat.index}" type="button" value="${abnormalInfo.video_name }"/></td>
                                     <%--<td>${abnormalInfo.video_path }</td>--%>
                                     <td>${abnormalInfo.username}</td>
                                     <td align="center" width="40px;"><a

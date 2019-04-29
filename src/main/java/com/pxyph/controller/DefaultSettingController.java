@@ -26,7 +26,7 @@ public class DefaultSettingController {
      */
     @RequestMapping(value = "/setting/defaultSetting")
     public ModelAndView defaultSetting(
-            int id,
+            String id,
             HttpSession session,ModelAndView mv){
         DefaultSetting defaultSetting = adService.findDefaultSettingById(1);
         if(defaultSetting != null){

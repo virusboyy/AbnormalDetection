@@ -20,6 +20,9 @@ public class ADConstants {
 	//存储设置的id
 	public static final String SETTINGID = "settingId";
 
+	//默认设置id
+	public static final String DEFAULTSETTINGID = "1";
+
 
 	// 登录
 	public static final String LOGIN = "loginForm";

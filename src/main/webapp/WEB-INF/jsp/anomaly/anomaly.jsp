@@ -29,6 +29,7 @@
             var src = "${url}";
             // alert(src);
             document.getElementById("video1").src=src;
+            document.getElementById("video2").src=src;
         }
         window.onload = myfun;
 
@@ -49,6 +50,7 @@
                     }
                 });
             }
+
 
             //日志信息
             var myVideo = document.getElementById("video1");
@@ -137,9 +139,8 @@
                 <tr class="main_trbg_tit" align="center">
                     <th height="100%">
                         <%--loop="true" autoplay="autoplay"  循环自动播放--%>
-                        <video id="video2" width="400" height="400" muted="true">
-                            <source src="/i/movie.ogg" type="video/ogg"/>
-                            <source src="/video/1.mp4" type="video/mp4"/>
+                        <video id="video2" width="400" height="400" muted="true" loop="true" autoplay="autoplay">
+                            <source src="" type="video/mp4"/>
                         </video>
                     </th>
                 </tr>

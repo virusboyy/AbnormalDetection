@@ -107,15 +107,15 @@ public class StorageManagerController {
             String[] idArray = ids.split(",");
             for (String id : idArray) {
 
-                StorageManager storageManager = adService.findStorageInfoById(Integer.parseInt(id));
-                File[] videoFiles = new File(VIDEOPATH).listFiles();
-                for (File file : videoFiles) {
-                    System.out.println(file.getAbsolutePath());
-                    System.out.println(file.getName());
-                    if (file.getName().equals(storageManager.getFile_name())) {
-                        file.getAbsoluteFile().delete();
-                    }
-                }
+                //StorageManager storageManager = adService.findStorageInfoById(Integer.parseInt(id));
+                //File[] videoFiles = new File(VIDEOPATH).listFiles();
+                //for (File file : videoFiles) {
+                //    System.out.println(file.getAbsolutePath());
+                //    System.out.println(file.getName());
+                //    if (file.getName().equals(storageManager.getFile_name())) {
+                //        file.getAbsoluteFile().delete();
+                //    }
+                //}
 
                 // 根据id删除配置
                 adService.removeStorageInfoById(Integer.parseInt(id));

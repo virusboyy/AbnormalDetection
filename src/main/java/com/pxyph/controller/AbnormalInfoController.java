@@ -96,26 +96,32 @@ public class AbnormalInfoController {
             if (start != null && !start.equals("") && end != null && !end.equals("")) {
                 Date start1 = sdf.parse(start);
                 Date end1 = sdf.parse(end);
-                for (int i = 0; i < abnormalInfos.size(); i++) {
+                for (int i = 0; i < abnormalInfos.size(); ) {
                     Date create_time = sdf.parse(abnormalInfos.get(i).getCreate_time());
-                    if (!belongCalendar(create_time,start1,end1)) {
+                    if (!belongCalendar(create_time, start1, end1)) {
                         abnormalInfos.remove(i);
+                    } else {
+                        i++;
                     }
                 }
             } else if (start != null && !start.equals("") && (end == null || end.equals(""))) {
                 Date start1 = sdf.parse(start);
-                for (int i = 0; i < abnormalInfos.size(); i++) {
+                for (int i = 0; i < abnormalInfos.size(); ) {
                     Date create_time = sdf.parse(abnormalInfos.get(i).getCreate_time());
-                    if (!belongCalendar(create_time,start1,null)) {
+                    if (!belongCalendar(create_time, start1, null)) {
                         abnormalInfos.remove(i);
+                    } else {
+                        i++;
                     }
                 }
             } else if ((start == null || start.equals("")) && end != null && !end.equals("")) {
                 Date end1 = sdf.parse(end);
-                for (int i = 0; i < abnormalInfos.size(); i++) {
+                for (int i = 0; i < abnormalInfos.size(); ) {
                     Date create_time = sdf.parse(abnormalInfos.get(i).getCreate_time());
-                    if (!belongCalendar(create_time,null,end1)) {
+                    if (!belongCalendar(create_time, null, end1)) {
                         abnormalInfos.remove(i);
+                    } else {
+                        i++;
                     }
                 }
             }
@@ -130,6 +136,7 @@ public class AbnormalInfoController {
 
     /**
      * 判断一个时间是否在一个时间段内
+     *
      * @param nowTime
      * @param beginTime
      * @param endTime
@@ -143,7 +150,7 @@ public class AbnormalInfoController {
         Calendar begin = Calendar.getInstance();
         //设置结束时间
         Calendar end = Calendar.getInstance();
-        if (beginTime!=null&&endTime!=null){
+        if (beginTime != null && endTime != null) {
             begin.setTime(beginTime);
             end.setTime(endTime);
             //处于开始时间之后，和结束时间之前的判断
@@ -152,18 +159,18 @@ public class AbnormalInfoController {
             } else {
                 return false;
             }
-        }else if (beginTime==null&&endTime!=null){
+        } else if (beginTime == null && endTime != null) {
             end.setTime(endTime);
-            if (date.before(end)){
+            if (date.before(end)) {
                 return true;
-            }else {
+            } else {
                 return false;
             }
-        }else if (beginTime!=null&&endTime==null){
+        } else if (beginTime != null && endTime == null) {
             begin.setTime(beginTime);
-            if (date.after(begin)){
+            if (date.after(begin)) {
                 return true;
-            }else {
+            } else {
                 return false;
             }
         }
@@ -227,7 +234,7 @@ public class AbnormalInfoController {
         String video_name = sysSetting.getVideo();
 
         //通过以上信息构建说明文档
-        String anomaly_document = "视频"+video_name+"在"+start_time+"微秒到"+end_time+"微秒之间出现了"+event_type+"情况";
+        String anomaly_document = "视频" + video_name + "在" + start_time + "微秒到" + end_time + "微秒之间出现了" + event_type + "情况";
 
         //将信息添加到abnormalInfo中
         abnormalInfo.setEvent_type(event_type);
@@ -254,7 +261,7 @@ public class AbnormalInfoController {
     /**
      * 处理修改信息请求
      *
-     * @param flag           标记， 1表示跳转到修改页面，2表示执行修改操作
+     * @param flag         标记， 1表示跳转到修改页面，2表示执行修改操作
      * @param abnormalInfo 要修改信息的对象
      * @param mv
      * @param session

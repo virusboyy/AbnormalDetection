@@ -45,16 +45,26 @@ public class AnomalyDetectionController {
         //}
         //int id = 1;//系统默认，当session中没有值，即没有进行设置时，自动选用系统设置
 
+        //默认设置
+        String ids = DEFAULTSETTINGID;
+
+        String video = null;
+
         //从session中取出id
-        String ids = (String) session.getAttribute(SETTINGID);
-        if (ids==null){
-            return "/setting/searchSysSettingsByKeys";
+        if ((String) session.getAttribute(SETTINGID)!=null){
+            ids = (String) session.getAttribute(SETTINGID);
+            int id = Integer.parseInt(ids);
+            SysSetting sysSetting = adService.findSysSettingById(id);
+            video = sysSetting.getVideo();
+        }else {
+            DefaultSetting defaultSetting = adService.findDefaultSettingById(Integer.parseInt(ids));
+            int video_id = defaultSetting.getVideo_id();
+            VideoInfo videoInfo = adService.findVideoInfoByVideoId(video_id + "");
+            video = videoInfo.getFile_name();
+
         }
-        int id = Integer.parseInt(ids);
-        SysSetting sysSetting = adService.findSysSettingById(id);
         //String save_path = sysSetting.getSave_path();
         String save_path = VIDEO_REFERENCE;
-        String video = sysSetting.getVideo();
         String url = save_path + "/" + video;
         System.out.println(url);
 
@@ -88,8 +98,26 @@ public class AnomalyDetectionController {
         String username = user.getUsername();
         logInfo.setUsername(username);
         //从session中取出id
-        int id = Integer.parseInt((String) session.getAttribute(SETTINGID));
-        SysSetting sysSetting = adService.findSysSettingById(id);
+        String ids = null;
+        SysSetting sysSetting = new SysSetting();
+        if ((String) session.getAttribute(SETTINGID)!=null){
+            ids = (String) session.getAttribute(SETTINGID);
+            sysSetting = adService.findSysSettingById(Integer.parseInt(ids));
+        }else {
+            ids = DEFAULTSETTINGID;
+            DefaultSetting defaultSetting = adService.findDefaultSettingById(Integer.parseInt(ids));
+            sysSetting.setInput_type(defaultSetting.getInput_type());
+            int video_id = defaultSetting.getVideo_id();
+            VideoInfo videoInfo = adService.findVideoInfoByVideoId(video_id + "");
+            sysSetting.setVideo(videoInfo.getFile_name());
+            sysSetting.setSave_path(defaultSetting.getSave_path());
+            sysSetting.setModel(defaultSetting.getModel());
+            sysSetting.setPlay_set(defaultSetting.getPlay_set());
+            sysSetting.setUsername(username);
+            sysSetting.setEvent_type(defaultSetting.getEvent_type());
+            sysSetting.setStart_time(defaultSetting.getStart_time());
+            sysSetting.setEnd_time(defaultSetting.getEnd_time());
+        }
 
         logInfo.setLog_document("用户" + username + "在视频" + sysSetting.getVideo() + "播放到" + currentTime + "秒时点击了" + tag + "按钮");
         //添加日志信息
@@ -118,17 +146,20 @@ public class AnomalyDetectionController {
     }
 
     private void addStorageManager(SysSetting sysSetting, VideoInfo video) {
-        StorageManager storageManager = new StorageManager();
-        storageManager.setVideo_id(video.getVideo_id());
-        storageManager.setFile_name(video.getFile_name());
-        storageManager.setFile_size(video.getFile_size());
-        storageManager.setVideo_width(video.getVideo_width());
-        storageManager.setVideo_height(video.getVideo_height());
-        storageManager.setCreate_time(new Date());
-        storageManager.setFrame_num(video.getFrame_num());
-        storageManager.setFps(video.getFps());
-        storageManager.setUsername(sysSetting.getUsername());
-        adService.addStorageInfo(storageManager);
+        StorageManager storageInfoByVideoId = adService.findStorageInfoByVideoId(video.getVideo_id());
+        if (storageInfoByVideoId==null) {
+            StorageManager storageManager = new StorageManager();
+            storageManager.setVideo_id(video.getVideo_id());
+            storageManager.setFile_name(video.getFile_name());
+            storageManager.setFile_size(video.getFile_size());
+            storageManager.setVideo_width(video.getVideo_width());
+            storageManager.setVideo_height(video.getVideo_height());
+            storageManager.setCreate_time(new Date());
+            storageManager.setFrame_num(video.getFrame_num());
+            storageManager.setFps(video.getFps());
+            storageManager.setUsername(sysSetting.getUsername());
+            adService.addStorageInfo(storageManager);
+        }
     }
 
     private void addAbnormalInfo(SysSetting sysSetting, VideoInfo video, int start_time, int end_time) {
@@ -155,6 +186,18 @@ public class AnomalyDetectionController {
     ) {
         List<LogInfo> logInfos = adService.findLogInfoByKeys(logInfo, pageModel);
         return logInfos;
+    }
+
+    //刷新页面
+    @RequestMapping(value = "/abnormal/video2")
+    @ResponseBody
+    public List<AbnormalInfo> getAbnormalVideo2(
+            PageModel pageModel,
+            @ModelAttribute AbnormalInfo abnormalInfo
+    ) {
+        List<AbnormalInfo> abnormalInfos = adService.findAbnormalInfoByKeys(abnormalInfo, pageModel);
+        abnormalInfos.get(0).setVideo_path(abnormalInfos.get(0).getVideo_path()+"/"+abnormalInfos.get(0).getVideo_name());
+        return abnormalInfos;
     }
 
 

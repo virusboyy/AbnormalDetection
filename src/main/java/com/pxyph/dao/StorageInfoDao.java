@@ -26,8 +26,12 @@ public interface StorageInfoDao {
 
 
     //根据id查询系统配置
-    @Select("select * from "+STORAGEMANAGER+" where ID = #{id}")
+    @Select("select * from "+STORAGEMANAGER+" where id = #{id}")
     StorageManager selectById(int id);
+
+    //根据id查询系统配置
+    @Select("select * from "+STORAGEMANAGER+" where video_id = #{video_id}")
+    StorageManager selectByVideoId(String video_id);
 
     // 根据id删除系统配置
     @Delete(" delete from "+STORAGEMANAGER+" where id = #{id} ")

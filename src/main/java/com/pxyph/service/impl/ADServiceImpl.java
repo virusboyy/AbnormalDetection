@@ -261,6 +261,11 @@ public class ADServiceImpl implements ADService {
 	}
 
 	@Override
+	public StorageManager findStorageInfoByVideoId(String video_id) {
+		return storageInfoDao.selectByVideoId(video_id);
+	}
+
+	@Override
 	public void modifyStorageInfo(StorageManager storageManager) {
 		storageInfoDao.update(storageManager);
 	}
@@ -270,6 +275,12 @@ public class ADServiceImpl implements ADService {
 	public VideoInfo findVideoInfoById(Integer id) {
 		return videoInfoDao.selectById(id);
 	}
+
+	@Override
+	public VideoInfo findVideoInfoByVideoId(String video_id) {
+		return videoInfoDao.selectByVideoId(video_id);
+	}
+
 	@Transactional(readOnly = true)
 	@Override
 	public VideoInfo findVideoInfoByFileName(String file_name) {

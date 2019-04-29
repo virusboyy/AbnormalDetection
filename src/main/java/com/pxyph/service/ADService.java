@@ -170,6 +170,8 @@ public interface ADService {
 	 * */
 	StorageManager findStorageInfoById(Integer id);
 
+	StorageManager findStorageInfoByVideoId(String video_id);
+
 	/**
 	 * 修改存储管理信息
 	 * @param storageManager 对象
@@ -182,6 +184,13 @@ public interface ADService {
 	 * @return
 	 */
 	VideoInfo findVideoInfoById(Integer id);
+
+	/**
+	 * 根据视频id查询视频信息
+	 * @param video_id
+	 * @return
+	 */
+	VideoInfo findVideoInfoByVideoId(String video_id);
 
 	/**
 	 * 根据用户名查找视频信息

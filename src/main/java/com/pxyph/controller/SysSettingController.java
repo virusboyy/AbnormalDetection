@@ -188,7 +188,7 @@ public class SysSettingController {
      */
     @RequestMapping(value = "/setting/getSetting")
     public ModelAndView setSysSetting(
-            int id,
+            String id,
             ModelAndView mv,
             HttpSession session) throws Exception {
         //创建Cookie对象

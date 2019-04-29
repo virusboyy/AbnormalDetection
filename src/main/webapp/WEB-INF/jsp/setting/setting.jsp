@@ -88,7 +88,7 @@
 
                 $.ligerDialog.confirm("确认要设置成默认配置吗?", "设置默认配置", function (r) {
                     if (r) {
-                        window.location = "${ctx }/setting/defaultSetting?id=1";
+                        window.location = "${ctx }/setting/defaultSetting?id=1+''";
                     }
                 });
 
