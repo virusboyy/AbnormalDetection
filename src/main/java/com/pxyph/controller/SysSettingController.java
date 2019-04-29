@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.ArrayList;
@@ -190,7 +188,7 @@ public class SysSettingController {
      */
     @RequestMapping(value = "/setting/getSetting")
     public ModelAndView setSysSetting(
-            String id,
+            int id,
             ModelAndView mv,
             HttpSession session) throws Exception {
         //创建Cookie对象
@@ -202,31 +200,7 @@ public class SysSettingController {
         ////将cookie信息发送给浏览器
         //response.addCookie(cookie);
 
-        session.setAttribute(SETTINGID,id.toString());
-        // 设置客户端跳转到查询请求
-        mv.setViewName("redirect:/setting/searchSysSettingsByKeys");
-        // 返回ModelAndView
-        return mv;
-    }
-
-    /**
-     * 设定默认设置配置
-     *
-     * @param id       需要的id字符串
-     * @param mv
-     * @param response
-     */
-    @RequestMapping(value = "/setting/defaultSetting")
-    public ModelAndView setDefaultSetting(
-            String id,
-            ModelAndView mv,
-            HttpServletResponse response) {
-        //创建Cookie对象
-        Cookie cookie = new Cookie("settingId", id.toString());
-        //设定cookie的最大有效时间
-        cookie.setMaxAge(60 * 60 * 24);
-        //将cookie信息发送给浏览器
-        response.addCookie(cookie);
+        session.setAttribute(SETTINGID,id);
         // 设置客户端跳转到查询请求
         mv.setViewName("redirect:/setting/searchSysSettingsByKeys");
         // 返回ModelAndView

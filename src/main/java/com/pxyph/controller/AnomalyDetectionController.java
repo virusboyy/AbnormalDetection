@@ -46,7 +46,11 @@ public class AnomalyDetectionController {
         //int id = 1;//系统默认，当session中没有值，即没有进行设置时，自动选用系统设置
 
         //从session中取出id
-        int id = Integer.parseInt((String) session.getAttribute(SETTINGID));
+        String ids = (String) session.getAttribute(SETTINGID);
+        if (ids==null){
+            return "/setting/searchSysSettingsByKeys";
+        }
+        int id = Integer.parseInt(ids);
         SysSetting sysSetting = adService.findSysSettingById(id);
         //String save_path = sysSetting.getSave_path();
         String save_path = VIDEO_REFERENCE;
