@@ -79,7 +79,7 @@ public class AnomalyDetectionController {
 
     @RequestMapping(value = "/log/play")
     @ResponseBody
-    public String play(
+    public String anomalyDetection(
             String currentTime,
             String tag,
             HttpSession session
@@ -137,7 +137,7 @@ public class AnomalyDetectionController {
      * @param video_name
      * @return 异常信息对象
      */
-    public AbnormalInfo anomalyDetect(String video_name) {
+    public AbnormalInfo anomalyDetectionModel(String video_name) {
         /**
          * 机器学习算法，进行异常行为检测
          */
@@ -166,7 +166,7 @@ public class AnomalyDetectionController {
         AbnormalInfo abnormalInfo = new AbnormalInfo();
         abnormalInfo.setEvent_type(sysSetting.getEvent_type());
         abnormalInfo.setCreate_time(new Date());
-        abnormalInfo.setAnomaly_document("视频" + sysSetting.getVideo() + "在" + start_time + "微秒到" + end_time + "微秒出现了" + sysSetting.getEvent_type() + "异常");
+        abnormalInfo.setAnomaly_document("视频" + sysSetting.getVideo() + "在" + start_time + "微秒到" + end_time + "微秒出现了" + sysSetting.getEvent_type());
         abnormalInfo.setStart_time(new BigInteger(String.valueOf(start_time)));
         abnormalInfo.setEnd_time(new BigInteger(String.valueOf(end_time)));
         abnormalInfo.setVideo_id(video.getVideo_id());
@@ -182,9 +182,12 @@ public class AnomalyDetectionController {
     @ResponseBody
     public List<LogInfo> getLog(
             PageModel pageModel,
-            @ModelAttribute LogInfo logInfo
+            @ModelAttribute LogInfo logInfo,
+            HttpSession session
     ) {
-        List<LogInfo> logInfos = adService.findLogInfoByKeys(logInfo, pageModel);
+        //List<LogInfo> logInfos = adService.findLogInfoByKeys(logInfo, pageModel);
+        User user = (User) session.getAttribute(USER_SESSION);
+        List<LogInfo> logInfos = adService.findAllLogInfoByUsername(user.getUsername());
         return logInfos;
     }
 
@@ -207,13 +210,13 @@ public class AnomalyDetectionController {
             Thread.sleep(start_time / 1000);
             logInfo.setEvent_type(sysSetting.getEvent_type());
             logInfo.setCreate_time(new Date());
-            logInfo.setLog_document("视频" + sysSetting.getVideo() + "在" + start_time + "微秒中处出现了" + sysSetting.getEvent_type() + "异常");
+            logInfo.setLog_document("视频" + sysSetting.getVideo() + "在" + start_time + "微秒中处出现了" + sysSetting.getEvent_type());
             adService.addLogInfo(logInfo);
 
             int end_time = sysSetting.getEnd_time();
             Thread.sleep((end_time - start_time) / 1000);
             logInfo.setCreate_time(new Date());
-            logInfo.setLog_document("视频" + sysSetting.getVideo() + "在" + end_time + "微秒中处结束了" + sysSetting.getEvent_type() + "异常");
+            logInfo.setLog_document("视频" + sysSetting.getVideo() + "在" + end_time + "微秒中处结束了" + sysSetting.getEvent_type());
             adService.addLogInfo(logInfo);
             VideoInfo video = adService.findVideoInfoByFileName(sysSetting.getVideo());
 
