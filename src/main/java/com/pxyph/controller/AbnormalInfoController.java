@@ -60,7 +60,8 @@ public class AbnormalInfoController {
         String end2 = (String) session.getAttribute("end");
 
         //判断是点击搜索还是点击下一页来到这个界面
-        if (event_type == null && start == null && end == null && (event_type2 != null || start2 != null || end2 != null)) {
+        if ((event_type==null||"".equals(event_type))&&(start==null||"".equals(start))&&(end==null||"".equals(end))
+                && ((event_type2 != null&&!"".equals(event_type2)) || (start2 != null&&!"".equals(start2)) || (end2 != null&&!"".equals(end2)))) {
             event_type = event_type2;
             start = start2;
             end = end2;
@@ -69,9 +70,8 @@ public class AbnormalInfoController {
         if (pageIndex != null) {
             pageModel.setPageIndex(pageIndex);
         }
-        if ((event_type == null && start == null && end == null) || (event_type.equals("") && start.equals("") && end.equals(""))
-                || (event_type == null && start.equals("") && end == null) || (event_type.equals("") && start == null && end == null)
-                || (event_type == null && start == null && end.equals("")) || (event_type.equals("") && start.equals("") && end == null)) {
+
+        if ((event_type==null||"".equals(event_type))&&(start==null||"".equals(start))&&(end==null||"".equals(end))) {
             //将session的值设定为null
             session.setAttribute("event_type", null);
             session.setAttribute("start", null);
@@ -90,10 +90,11 @@ public class AbnormalInfoController {
         session.setAttribute("end", end);
 
         abnormalInfo.setEvent_type(event_type);
+        //通过时间来限定查询结果，目前还没发实现分页，主要因为，不清楚怎么确定当前时间在指定时间段内
         List<AbnormalInfo> abnormalInfos = adService.findAbnormalInfoByKeys(abnormalInfo, pageModel);
         if (abnormalInfos.size() > 0) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            if (start != null && !start.equals("") && end != null && !end.equals("")) {
+            if (start != null && !"".equals(start) && end != null && !"".equals(end)) {
                 Date start1 = sdf.parse(start);
                 Date end1 = sdf.parse(end);
                 for (int i = 0; i < abnormalInfos.size(); ) {
@@ -104,7 +105,7 @@ public class AbnormalInfoController {
                         i++;
                     }
                 }
-            } else if (start != null && !start.equals("") && (end == null || end.equals(""))) {
+            } else if (start != null && !"".equals(start) && (end == null || "".equals(end))) {
                 Date start1 = sdf.parse(start);
                 for (int i = 0; i < abnormalInfos.size(); ) {
                     Date create_time = sdf.parse(abnormalInfos.get(i).getCreate_time());
@@ -114,7 +115,7 @@ public class AbnormalInfoController {
                         i++;
                     }
                 }
-            } else if ((start == null || start.equals("")) && end != null && !end.equals("")) {
+            } else if ((start == null || "".equals(start)) && end != null && !"".equals(end)) {
                 Date end1 = sdf.parse(end);
                 for (int i = 0; i < abnormalInfos.size(); ) {
                     Date create_time = sdf.parse(abnormalInfos.get(i).getCreate_time());

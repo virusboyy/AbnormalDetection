@@ -21,10 +21,10 @@ public class StorageInfoDynaSqlProvider {
                 FROM(STORAGEMANAGER);
                 if (params.get("storageManager") != null) {
                     StorageManager storageManager = (StorageManager) params.get("storageManager");
-                    if (storageManager.getUsername() != null && !storageManager.getUsername().equals("")) {
+                    if (storageManager.getUsername() != null && !"".equals(storageManager.getUsername())) {
                         WHERE(" username LIKE CONCAT ('%',#{storageManager.username},'%')");
                     }
-                    if (storageManager.getFile_name() != null && !storageManager.getFile_name().equals("")) {
+                    if (storageManager.getFile_name() != null && !"".equals(storageManager.getFile_name())) {
                         WHERE("  file_name LIKE CONCAT ('%',#{storageManager.file_name},'%') ");
                     }
                 }
@@ -46,10 +46,10 @@ public class StorageInfoDynaSqlProvider {
                 FROM(STORAGEMANAGER);
                 if (params.get("storageManager") != null) {
                     StorageManager storageManager = (StorageManager) params.get("storageManager");
-                    if (storageManager.getUsername() != null && !storageManager.getUsername().equals("")) {
+                    if (storageManager.getUsername() != null && !"".equals(storageManager.getUsername())) {
                         WHERE(" username LIKE CONCAT ('%',#{storageManager.username},'%')");
                     }
-                    if (storageManager.getFile_name() != null && !storageManager.getFile_name().equals("")) {
+                    if (storageManager.getFile_name() != null && !"".equals(storageManager.getFile_name())) {
                         WHERE("  file_name LIKE CONCAT ('%',#{storageManager.file_name},'%') ");
                     }
                 }
@@ -63,21 +63,21 @@ public class StorageInfoDynaSqlProvider {
         return new SQL() {
             {
                 INSERT_INTO(STORAGEMANAGER);
-                if (storageManager.getVideo_id() != null && !storageManager.getVideo_id().equals("")) {
+                if (storageManager.getVideo_id() != null && !"".equals(storageManager.getVideo_id())) {
                     VALUES("video_id", "#{video_id}");
                 }
-                if (storageManager.getFile_name() != null && !storageManager.getFile_name().equals("")) {
+                if (storageManager.getFile_name() != null && !"".equals(storageManager.getFile_name())) {
                     VALUES("file_name", "#{file_name}");
                 }
                 VALUES("file_size","#{file_size}");
                 VALUES("video_width","#{video_width}");
                 VALUES("video_height","#{video_height}");
-                if (storageManager.getCreate_time() !=null) {
+                if (storageManager.getCreate_time() !=null&&!"".equals(storageManager.getCreate_time())) {
                     VALUES("create_time", "#{create_time}");
                 }
                 VALUES("frame_num","#{frame_num}");
                 VALUES("fps","#{fps}");
-                if (storageManager.getUsername() != null && !storageManager.getUsername().equals("")) {
+                if (storageManager.getUsername() != null && !"".equals(storageManager.getUsername())) {
                     VALUES("username", "#{username}");
                 }
             }
@@ -99,7 +99,7 @@ public class StorageInfoDynaSqlProvider {
                 if (storageManager.getVideo_height() != null) {
                     SET(" video_height = #{video_height} ");
                 }
-                if (storageManager.getCreate_time() != null) {
+                if (storageManager.getCreate_time() != null&&!"".equals(storageManager.getCreate_time())) {
                     SET(" create_time = #{create_time} ");
                 }
                 if (storageManager.getFrame_num() != null) {
@@ -108,7 +108,7 @@ public class StorageInfoDynaSqlProvider {
                 if (storageManager.getFps() != null) {
                     SET(" fps = #{fps} ");
                 }
-                if (storageManager.getUsername() != null) {
+                if (storageManager.getUsername() != null&&!"".equals(storageManager.getUsername())) {
                     SET(" username = #{username} ");
                 }
                 WHERE(" id = #{id} ");

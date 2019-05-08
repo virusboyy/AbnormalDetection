@@ -44,7 +44,8 @@ public class LogInfoController {
         String event_type2 = (String) session.getAttribute("event_type");
 
         //判断是点击搜索还是点击下一页来到这个界面
-        if (username == null && event_type == null&&(username2 != null || event_type2!=null)) {
+        if ((username==null||"".equals(username))&&(event_type==null||"".equals(event_type))
+                &&(username2 != null&&!"".equals(username2)) || (event_type2!=null&&!"".equals(event_type2))) {
             username = username2;
             event_type =event_type2;
         }
@@ -52,8 +53,7 @@ public class LogInfoController {
         if (pageIndex != null) {
             pageModel.setPageIndex(pageIndex);
         }
-        if ((username == null && event_type == null) || (username.equals("")&&event_type.equals(""))
-                ||(username == null && event_type.equals(""))||(username.equals("") && event_type == null)) {
+        if ((username==null||"".equals(username))&&(event_type==null||"".equals(event_type))) {
             //将session的值设定为null
             session.setAttribute("username", null);
             session.setAttribute("event_type", null);

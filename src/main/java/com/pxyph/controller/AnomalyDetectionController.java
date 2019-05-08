@@ -51,7 +51,7 @@ public class AnomalyDetectionController {
         String video = null;
 
         //从session中取出id
-        if ((String) session.getAttribute(SETTINGID)!=null){
+        if ((String) session.getAttribute(SETTINGID)!=null&&!"".equals((String) session.getAttribute(SETTINGID))){
             ids = (String) session.getAttribute(SETTINGID);
             int id = Integer.parseInt(ids);
             SysSetting sysSetting = adService.findSysSettingById(id);
@@ -99,7 +99,7 @@ public class AnomalyDetectionController {
         //从session中取出id
         String ids = null;
         SysSetting sysSetting = new SysSetting();
-        if ((String) session.getAttribute(SETTINGID)!=null){
+        if ((String) session.getAttribute(SETTINGID)!=null&&!"".equals((String) session.getAttribute(SETTINGID))){
             ids = (String) session.getAttribute(SETTINGID);
             sysSetting = adService.findSysSettingById(Integer.parseInt(ids));
         }else {
@@ -205,25 +205,27 @@ public class AnomalyDetectionController {
         if (tag.equals("开始") || tag.equals("继续")) {
             String video_id = sysSetting.getVideo_id();
             VideoInfo videoInfo = adService.findVideoInfoByVideoId(video_id);
-            int start_time = videoInfo.getStart_time();
-            Thread.sleep(start_time / 1000);
-            logInfo.setEvent_type(videoInfo.getEvent_type());
-            logInfo.setCreate_time(new Date());
-            logInfo.setLog_document("视频" + videoInfo.getFile_name() + "在" + start_time + "微秒中处出现了" + videoInfo.getEvent_type());
-            adService.addLogInfo(logInfo);
+            if (videoInfo.getStart_time()!=0&&videoInfo.getEnd_time()!=0) {
+                int start_time = videoInfo.getStart_time();
+                Thread.sleep(start_time / 1000);
+                logInfo.setEvent_type(videoInfo.getEvent_type());
+                logInfo.setCreate_time(new Date());
+                logInfo.setLog_document("视频" + videoInfo.getFile_name() + "在" + start_time + "微秒中处出现了" + videoInfo.getEvent_type());
+                adService.addLogInfo(logInfo);
 
-            int end_time = videoInfo.getEnd_time();
-            Thread.sleep((end_time - start_time) / 1000);
-            logInfo.setCreate_time(new Date());
-            logInfo.setLog_document("视频" + videoInfo.getFile_name() + "在" + end_time + "微秒中处结束了" + videoInfo.getEvent_type());
-            adService.addLogInfo(logInfo);
-            //VideoInfo video = adService.findVideoInfoByFileName(sysSetting.getVideo());
+                int end_time = videoInfo.getEnd_time();
+                Thread.sleep((end_time - start_time) / 1000);
+                logInfo.setCreate_time(new Date());
+                logInfo.setLog_document("视频" + videoInfo.getFile_name() + "在" + end_time + "微秒中处结束了" + videoInfo.getEvent_type());
+                adService.addLogInfo(logInfo);
+                //VideoInfo video = adService.findVideoInfoByFileName(sysSetting.getVideo());
 
-            //添加异常信息
-            addAbnormalInfo(sysSetting, videoInfo, start_time, end_time);
+                //添加异常信息
+                addAbnormalInfo(sysSetting, videoInfo, start_time, end_time);
 
-            //添加存储信息
-            addStorageManager(sysSetting, videoInfo);
+                //添加存储信息
+                addStorageManager(sysSetting, videoInfo);
+            }
         }
     }
 

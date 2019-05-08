@@ -21,10 +21,10 @@ public class LogInfoDynaSqlProvider {
                 FROM(LOGINFO);
                 if (params.get("logInfo") != null) {
                     LogInfo logInfo = (LogInfo) params.get("logInfo");
-                    if (logInfo.getUsername() != null && !logInfo.getUsername().equals("")) {
+                    if (logInfo.getUsername() != null && !"".equals(logInfo.getUsername())) {
                         WHERE(" username LIKE CONCAT ('%',#{logInfo.username},'%')");
                     }
-                    if (logInfo.getEvent_type() != null && !logInfo.getEvent_type().equals("")) {
+                    if (logInfo.getEvent_type() != null && !"".equals(logInfo.getEvent_type())) {
                         WHERE("  event_type LIKE CONCAT ('%',#{logInfo.event_type},'%') ");
                     }
                 }
@@ -46,10 +46,10 @@ public class LogInfoDynaSqlProvider {
                 FROM(LOGINFO);
                 if (params.get("logInfo") != null) {
                     LogInfo logInfo = (LogInfo) params.get("logInfo");
-                    if (logInfo.getUsername() != null && !logInfo.getUsername().equals("")) {
+                    if (logInfo.getUsername() != null && !"".equals(logInfo.getUsername())) {
                         WHERE(" username LIKE CONCAT ('%',#{logInfo.username},'%')");
                     }
-                    if (logInfo.getEvent_type() != null && !logInfo.getEvent_type().equals("")) {
+                    if (logInfo.getEvent_type() != null && !"".equals(logInfo.getEvent_type())) {
                         WHERE("  event_type LIKE CONCAT ('%',#{logInfo.event_type},'%') ");
                     }
                 }
@@ -63,16 +63,16 @@ public class LogInfoDynaSqlProvider {
         return new SQL() {
             {
                 INSERT_INTO(LOGINFO);
-                if (logInfo.getEvent_type() != null && !logInfo.getEvent_type().equals("")) {
+                if (logInfo.getEvent_type() != null && !"".equals(logInfo.getEvent_type())) {
                     VALUES("event_type", "#{event_type}");
                 }
-                if (logInfo.getCreate_time() !=null) {
+                if (logInfo.getCreate_time() !=null&&!"".equals(logInfo.getCreate_time())) {
                     VALUES("create_time", "#{create_time}");
                 }
-                if (logInfo.getLog_document() != null && !logInfo.getLog_document().equals("")) {
+                if (logInfo.getLog_document() != null && !"".equals(logInfo.getLog_document())) {
                     VALUES("log_document", "#{log_document}");
                 }
-                if (logInfo.getUsername() != null && !logInfo.getUsername().equals("")) {
+                if (logInfo.getUsername() != null && !"".equals(logInfo.getUsername())) {
                     VALUES("username", "#{username}");
                 }
             }
@@ -85,16 +85,16 @@ public class LogInfoDynaSqlProvider {
         return new SQL() {
             {
                 UPDATE(LOGINFO);
-                if (logInfo.getEvent_type() != null) {
+                if (logInfo.getEvent_type() != null&&!"".equals(logInfo.getEvent_type())) {
                     SET(" event_type = #{event_type} ");
                 }
-                if (logInfo.getCreate_time() != null) {
+                if (logInfo.getCreate_time() != null&&!"".equals(logInfo.getCreate_time())) {
                     SET(" create_time = #{create_time} ");
                 }
-                if (logInfo.getLog_document() != null) {
+                if (logInfo.getLog_document() != null&&!"".equals(logInfo.getLog_document())) {
                     SET(" log_document = #{log_document} ");
                 }
-                if (logInfo.getUsername() != null) {
+                if (logInfo.getUsername() != null&&!"".equals(logInfo.getUsername())) {
                     SET(" username = #{username} ");
                 }
                 WHERE(" id = #{id} ");

@@ -58,7 +58,8 @@ public class StorageManagerController {
         String file_name2 = (String) session.getAttribute("file_name");
 
         //判断是点击搜索还是点击下一页来到这个界面
-        if (username == null && file_name == null && (username2 != null || file_name2 != null)) {
+        if ((username == null || "".equals(username)) && (file_name == null||"".equals(file_name))
+                && (username2 != null&&!"".equals(username2)) || (file_name2 != null&&!"".equals(file_name2))) {
             username = username2;
             file_name = file_name2;
         }
@@ -66,8 +67,7 @@ public class StorageManagerController {
         if (pageIndex != null) {
             pageModel.setPageIndex(pageIndex);
         }
-        if ((username == null && file_name == null) || (username.equals("") && file_name.equals(""))
-                || (username == null && file_name.equals("")) || (username.equals("") && file_name == null)) {
+        if ((username == null || "".equals(username)) && (file_name == null||"".equals(file_name))) {
             //将session的值设定为null
             session.setAttribute("username", null);
             session.setAttribute("file_name", null);
@@ -136,8 +136,9 @@ public class StorageManagerController {
 
     /**
      * 处理添加请求
+     * <p>
+     * 标记， 1表示跳转到添加页面，2表示执行添加操作
      *
-     *           标记， 1表示跳转到添加页面，2表示执行添加操作
      * @param storageManager 要添加的存储管理信息对象
      */
     @RequestMapping(value = "/storageManager/addStorageInfo")
@@ -154,8 +155,8 @@ public class StorageManagerController {
         String file_name = videoInfo.getFile_name();
 
         //保存到一个目标文件中
-        File file = new File(videoPath+file_name);
-        MultipartFile file2 = new MockMultipartFile(file_name,file_name,"text/plain",new FileInputStream(file));
+        File file = new File(videoPath + file_name);
+        MultipartFile file2 = new MockMultipartFile(file_name, file_name, "text/plain", new FileInputStream(file));
         file2.transferTo(new File(VIDEOPATH + File.separator + file_name));
 
         storageManager.setVideo_id(videoInfo.getVideo_id());

@@ -21,7 +21,7 @@ public class AbnormalInfoDynaSqlProvider {
                 FROM(ABNORMALINFO);
                 if (params.get("abnormalInfo") != null) {
                     AbnormalInfo abnormalInfo = (AbnormalInfo) params.get("abnormalInfo");
-                    if (abnormalInfo.getEvent_type() != null && !abnormalInfo.getEvent_type().equals("")) {
+                    if (abnormalInfo.getEvent_type() != null && !"".equals(abnormalInfo.getEvent_type())) {
                         WHERE(" event_type LIKE CONCAT ('%',#{abnormalInfo.event_type},'%')");
                     }
                 }
@@ -43,7 +43,7 @@ public class AbnormalInfoDynaSqlProvider {
                 FROM(ABNORMALINFO);
                 if (params.get("abnormalInfo") != null) {
                     AbnormalInfo abnormalInfo = (AbnormalInfo) params.get("abnormalInfo");
-                    if (abnormalInfo.getEvent_type() != null && !abnormalInfo.getEvent_type().equals("")) {
+                    if (abnormalInfo.getEvent_type() != null && !"".equals(abnormalInfo.getEvent_type())) {
                         WHERE(" event_type LIKE CONCAT ('%',#{abnormalInfo.event_type},'%')");
                     }
                 }
@@ -57,13 +57,13 @@ public class AbnormalInfoDynaSqlProvider {
         return new SQL() {
             {
                 INSERT_INTO(ABNORMALINFO);
-                if (abnormalInfo.getEvent_type() !=null&& !abnormalInfo.getEvent_type().equals("")) {
+                if (abnormalInfo.getEvent_type() !=null&& !"".equals(abnormalInfo.getEvent_type())) {
                     VALUES("event_type", "#{event_type}");
                 }
-                if (abnormalInfo.getCreate_time() !=null) {
+                if (abnormalInfo.getCreate_time() !=null&&!"".equals(abnormalInfo.getCreate_time())) {
                     VALUES("create_time", "#{create_time}");
                 }
-                if (abnormalInfo.getAnomaly_document() !=null&& !abnormalInfo.getAnomaly_document().equals("")) {
+                if (abnormalInfo.getAnomaly_document() !=null&& !"".equals(abnormalInfo.getAnomaly_document())) {
                     VALUES("anomaly_document", "#{anomaly_document}");
                 }
                 if (abnormalInfo.getStart_time() !=null) {
@@ -72,16 +72,16 @@ public class AbnormalInfoDynaSqlProvider {
                 if (abnormalInfo.getEnd_time() !=null) {
                     VALUES("end_time", "#{end_time}");
                 }
-                if (abnormalInfo.getVideo_id() != null && !abnormalInfo.getVideo_id().equals("")) {
+                if (abnormalInfo.getVideo_id() != null && !"".equals(abnormalInfo.getVideo_id())) {
                     VALUES("video_id", "#{video_id}");
                 }
-                if (abnormalInfo.getVideo_name() != null && !abnormalInfo.getVideo_name().equals("")) {
+                if (abnormalInfo.getVideo_name() != null && !"".equals(abnormalInfo.getVideo_name())) {
                     VALUES("video_name", "#{video_name}");
                 }
-                if (abnormalInfo.getVideo_path() != null && !abnormalInfo.getVideo_path().equals("")) {
+                if (abnormalInfo.getVideo_path() != null && !"".equals(abnormalInfo.getVideo_path())) {
                     VALUES("video_path", "#{video_path}");
                 }
-                if (abnormalInfo.getUsername() != null && !abnormalInfo.getUsername().equals("")) {
+                if (abnormalInfo.getUsername() != null && !"".equals(abnormalInfo.getUsername())) {
                     VALUES("username", "#{username}");
                 }
             }
@@ -94,13 +94,13 @@ public class AbnormalInfoDynaSqlProvider {
         return new SQL() {
             {
                 UPDATE(ABNORMALINFO);
-                if (abnormalInfo.getEvent_type() != null) {
+                if (abnormalInfo.getEvent_type() != null&&!"".equals(abnormalInfo.getEvent_type())) {
                     SET(" event_type = #{event_type} ");
                 }
-                if (abnormalInfo.getCreate_time() != null) {
+                if (abnormalInfo.getCreate_time() != null&&!"".equals(abnormalInfo.getCreate_time())) {
                     SET(" create_time = #{create_time} ");
                 }
-                if (abnormalInfo.getAnomaly_document() != null) {
+                if (abnormalInfo.getAnomaly_document() != null&&!"".equals(abnormalInfo.getAnomaly_document())) {
                     SET(" anomaly_document = #{anomaly_document} ");
                 }
                 if (abnormalInfo.getStart_time() != null) {
@@ -109,7 +109,7 @@ public class AbnormalInfoDynaSqlProvider {
                 if (abnormalInfo.getEnd_time() != null) {
                     SET(" end_time = #{end_time} ");
                 }
-                if (abnormalInfo.getUsername() != null) {
+                if (abnormalInfo.getUsername() != null&&!"".equals(abnormalInfo.getUsername())) {
                     SET(" username = #{username} ");
                 }
                 WHERE(" id = #{id} ");

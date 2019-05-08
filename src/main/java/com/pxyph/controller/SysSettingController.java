@@ -269,14 +269,14 @@ public class SysSettingController {
         String keys = request.getParameter("keys");
         String keys2 = (String) session.getAttribute("keys");
         //判断是点击搜索还是点击下一页来到这个界面
-        if (keys == null && keys2 != null) {
+        if ((keys == null||"".equals(keys)) && (keys2 != null&&!"".equals(keys2))) {
             keys = keys2;
         }
         PageModel pageModel = new PageModel();
         if (pageIndex != null) {
             pageModel.setPageIndex(pageIndex);
         }
-        if (keys == null) {
+        if (keys == null||"".equals(keys)) {
             //将session的值设定为null
             session.setAttribute("keys", null);
             /** 查询配置信息     */

@@ -20,25 +20,25 @@ public class SysSettingDynaSqlProvider {
         return new SQL() {
             {
                 INSERT_INTO(SYSSETTING);
-                if (sysSetting.getInput_type() != null && !sysSetting.getInput_type().equals("")) {
+                if (sysSetting.getInput_type() != null && !"".equals(sysSetting.getInput_type())) {
                     VALUES("input_type", "#{input_type}");
                 }
-                if (sysSetting.getVideo_id() != null && !sysSetting.getVideo_id().equals("")) {
+                if (sysSetting.getVideo_id() != null && !"".equals(sysSetting.getVideo_id())) {
                     VALUES("video_id", "#{video_id}");
                 }
-                if (sysSetting.getVideo() != null && !sysSetting.getVideo().equals("")) {
+                if (sysSetting.getVideo() != null && !"".equals(sysSetting.getVideo())) {
                     VALUES("video", "#{video}");
                 }
-                if (sysSetting.getSave_path() != null && !sysSetting.getSave_path().equals("")) {
+                if (sysSetting.getSave_path() != null && !"".equals(sysSetting.getSave_path())) {
                     VALUES("save_path", "#{save_path}");
                 }
-                if (sysSetting.getModel() != null && !sysSetting.getModel().equals("")) {
+                if (sysSetting.getModel() != null && !"".equals(sysSetting.getModel())) {
                     VALUES("model", "#{model}");
                 }
                 if (sysSetting.getPlay_set() > 0) {
                     VALUES("play_set", "#{play_set}");
                 }
-                if (sysSetting.getUsername() != null && !sysSetting.getUsername().equals("")) {
+                if (sysSetting.getUsername() != null && !"".equals(sysSetting.getUsername())) {
                     VALUES("username", "#{username}");
                 }
             }
@@ -51,25 +51,25 @@ public class SysSettingDynaSqlProvider {
         return new SQL() {
             {
                 UPDATE(SYSSETTING);
-                if (sysSetting.getInput_type() != null) {
+                if (sysSetting.getInput_type() != null&&!"".equals(sysSetting.getInput_type())) {
                     SET(" input_type = #{input_type} ");
                 }
-                if (sysSetting.getVideo_id() != null) {
+                if (sysSetting.getVideo_id() != null&&!"".equals(sysSetting.getVideo_id())) {
                     SET(" video_id = #{video_id} ");
                 }
-                if (sysSetting.getVideo() != null) {
+                if (sysSetting.getVideo() != null&&!"".equals(sysSetting.getVideo())) {
                     SET(" video = #{video} ");
                 }
-                if (sysSetting.getSave_path() != null) {
+                if (sysSetting.getSave_path() != null&&!"".equals(sysSetting.getSave_path())) {
                     SET(" save_path = #{save_path} ");
                 }
-                if (sysSetting.getModel() != null) {
+                if (sysSetting.getModel() != null&&!"".equals(sysSetting.getModel())) {
                     SET(" model = #{model} ");
                 }
                 if (sysSetting.getPlay_set() > 0) {
                     SET(" play_set = #{play_set} ");
                 }
-                if (sysSetting.getUsername() != null) {
+                if (sysSetting.getUsername() != null&&!"".equals(sysSetting.getUsername())) {
                     SET(" username=#{username} ");
                 }
                 WHERE(" id = #{id} ");
@@ -85,7 +85,7 @@ public class SysSettingDynaSqlProvider {
                 FROM(SYSSETTING);
                 if (params.get("sysSetting") != null) {
                     SysSetting sysSetting = (SysSetting) params.get("sysSetting");
-                    if (sysSetting.getUsername() != null && !sysSetting.getUsername().equals("")) {
+                    if (sysSetting.getUsername() != null && !"".equals(sysSetting.getUsername())) {
                         WHERE(" username LIKE CONCAT ('%',#{sysSetting.username},'%')");
                     }
                     //if (sysSetting.getInput_type() != null && !sysSetting.getInput_type().equals("")) {
@@ -111,7 +111,7 @@ public class SysSettingDynaSqlProvider {
                 FROM(SYSSETTING);
                 if (params.get("sysSetting") != null) {
                     SysSetting sysSetting = (SysSetting) params.get("sysSetting");
-                    if (sysSetting.getUsername() != null && !sysSetting.getUsername().equals("")) {
+                    if (sysSetting.getUsername() != null && !"".equals(sysSetting.getUsername())) {
                         WHERE(" username LIKE CONCAT ('%',#{sysSetting.username},'%')");
                     }
                     //if (sysSetting.getInput_type() != null && !sysSetting.getInput_type().equals("")) {
