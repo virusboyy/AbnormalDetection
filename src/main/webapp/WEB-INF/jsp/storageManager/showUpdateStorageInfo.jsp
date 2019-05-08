@@ -22,6 +22,14 @@
     <script src="${ctx}/js/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
     <script src="${ctx}/js/ligerUI/js/plugins/ligerResizable.jss" type="text/javascript"></script>
     <link href="${ctx}/css/pager.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript">
+        $(function () {
+            $("#query").click(function () {
+                // alert("dfjksdjfk")
+                window.location = "${ctx}/storageManager/selectStorageInfoByKeys";
+            })
+        });
+    </script>
 
 </head>
 <body>
@@ -69,8 +77,9 @@
                         <td class="main_tdbor"></td>
                     </tr>
                     <tr>
-                        <td align="left" class="fftd"><input type="submit" value="修改">&nbsp;&nbsp;<input type="reset"
-                                                                                                         value="取消 ">
+                        <td align="left" class="fftd">
+                            <input type="submit" value="修改">&nbsp;&nbsp;
+                            <input type="button" id="query" value="取消">
                         </td>
                     </tr>
                 </table>

@@ -27,7 +27,7 @@
         //自动加载视频
         function myfun() {
             var src = "${url}";
-            // alert(src);
+            //alert(${ctx}+src);
             document.getElementById("video1").src=src;
             document.getElementById("video2").src=src;
         }
@@ -113,8 +113,8 @@
                         <div id="video-box">
                             <%--muted="true" 设置默认为静音--%>
                             <video width="600" height="400" id="video1" muted="true">
-                                <%--<source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4"/>--%>
-                                <source src="" type="video/mp4"/>
+                                <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4"/>
+                                <%--<source src="" type="video/mp4"/>--%>
                             </video>
 
                             <%--<video style="object-fit: fill;width: 200px;height: 50px;" controls>--%>
@@ -140,7 +140,9 @@
                     <th height="100%">
                         <%--loop="true" autoplay="autoplay"  循环自动播放--%>
                         <video id="video2" width="400" height="400" muted="true" loop="true" autoplay="autoplay">
-                            <source src="" type="video/mp4"/>
+                            <%--<source src="" type="video/mp4"/>--%>
+                            <source src="video/RoadAccidents022_x264.mp4" type="video/mp4"/>
+
                         </video>
                     </th>
                 </tr>

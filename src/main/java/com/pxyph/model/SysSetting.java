@@ -10,6 +10,7 @@ public class SysSetting  implements Serializable {
 
     private Integer id;//系统配置id
     private String input_type;//输入类型
+    private String video_id; //视频id
     private String video;//视频文件名
     private MultipartFile videofile; //视频文件
     private String save_path;//存储路径
@@ -17,9 +18,6 @@ public class SysSetting  implements Serializable {
     private MultipartFile modelfile;//模型文件
     private Integer play_set;//播放设置
     private String username;//用于确定由哪个用户设定的
-    private String event_type;
-    private int start_time;
-    private int end_time;
 
 
     public SysSetting() {
@@ -40,6 +38,14 @@ public class SysSetting  implements Serializable {
 
     public void setInput_type(String input_type) {
         this.input_type = input_type;
+    }
+
+    public String getVideo_id() {
+        return video_id;
+    }
+
+    public void setVideo_id(String video_id) {
+        this.video_id = video_id;
     }
 
     public String getVideo() {
@@ -98,35 +104,13 @@ public class SysSetting  implements Serializable {
         this.username = username;
     }
 
-    public String getEvent_type() {
-        return event_type;
-    }
-
-    public void setEvent_type(String event_type) {
-        this.event_type = event_type;
-    }
-
-    public int getStart_time() {
-        return start_time;
-    }
-
-    public void setStart_time(int start_time) {
-        this.start_time = start_time;
-    }
-
-    public int getEnd_time() {
-        return end_time;
-    }
-
-    public void setEnd_time(int end_time) {
-        this.end_time = end_time;
-    }
 
     @Override
     public String toString() {
         return "SysSetting{" +
                 "id=" + id +
                 ", input_type='" + input_type + '\'' +
+                ", video_id='" + video_id + '\'' +
                 ", video='" + video + '\'' +
                 ", videofile=" + videofile +
                 ", save_path='" + save_path + '\'' +
@@ -134,9 +118,6 @@ public class SysSetting  implements Serializable {
                 ", modelfile=" + modelfile +
                 ", play_set=" + play_set +
                 ", username='" + username + '\'' +
-                ", event_type='" + event_type + '\'' +
-                ", start_time=" + start_time +
-                ", end_time=" + end_time +
                 '}';
     }
 }

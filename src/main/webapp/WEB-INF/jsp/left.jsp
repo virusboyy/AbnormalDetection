@@ -79,7 +79,7 @@
         <tr valign="top" id="submenu2" style="display: none">
             <td class="left_nav_bgshw" height="25">
                 <p class="left_nav_link"><img src="${ctx}/images/left_nav_arrow.gif">&nbsp;&nbsp;<a
-                        href="/log/selectLogInfoByKeys" target="main">日志管理主界面</a></img></p>
+                        href="log/selectLogInfoByKeys" target="main">日志管理主界面</a></img></p>
             </td>
         </tr>
         <tr>

@@ -44,6 +44,10 @@
                 }
                 $("#logInfoForm").submit();
             });
+
+            $("#query").click(function () {
+                window.location = "${ctx}/log/selectLogInfoByKeys";
+            });
         });
 
 
@@ -98,8 +102,9 @@
                         <td class="main_tdbor"></td>
                     </tr>
                     <tr>
-                        <td align="left" class="fftd"><input type="submit" value="修改">&nbsp;&nbsp;<input type="reset"
-                                                                                                         value="取消 ">
+                        <td align="left" class="fftd">
+                            <input type="submit" value="修改">&nbsp;&nbsp;
+                            <input type="button" id="query" value="取消">
                         </td>
                     </tr>
                 </table>

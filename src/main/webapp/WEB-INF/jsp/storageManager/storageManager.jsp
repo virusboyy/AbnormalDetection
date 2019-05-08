@@ -62,6 +62,19 @@
                 }
             })
 
+            $("tr[id^='data_']").click(function () {
+
+                // var filename12 = document.getElementById("preview_abnormal").value;
+                //var src = "/video/"+filename12;
+                //var src = "http://www.w3school.com.cn/example/html5/mov_bbb.mp4";
+                // var x = $("tr[id^='data_']").find("td");
+                var x = $(this).find("td");
+                var y = x.eq(3).text();
+                // alert(y);
+                var src = "/video/"+y;
+                document.getElementById("video_storageManager").src=src;
+            })
+
             $("#preview_storageManager").click(function() {
                 var filename12 = document.getElementById("preview_storageManager").value;
                 var src = "/video/"+filename12;
@@ -125,7 +138,7 @@
                                 <td><input type="checkbox" name="checkAll" id="checkAll"></td>
                                 <td>存储信息id</td>
                                 <td>视频id</td>
-                                <td>文件名</td>
+                                <td>视频名</td>
                                 <td>文件大小</td>
                                 <td>视频宽</td>
                                 <td>视频高</td>
@@ -141,7 +154,7 @@
                                     <td><input type="checkbox" id="box_${stat.index}" value="${storageInfo.id}"></td>
                                     <td>${storageInfo.id }</td>
                                     <td>${storageInfo.video_id }</td>
-                                    <td><input id="preview_storageManager" type="button" value="${storageInfo.file_name }"/></td>
+                                    <td>${storageInfo.file_name }</td>
                                     <td>${storageInfo.file_size }</td>
                                     <td>${storageInfo.video_width }</td>
                                     <td>${storageInfo.video_height }</td>

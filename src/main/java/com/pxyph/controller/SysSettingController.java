@@ -3,6 +3,7 @@ package com.pxyph.controller;
 import com.pxyph.model.DataType;
 import com.pxyph.model.SysSetting;
 import com.pxyph.model.User;
+import com.pxyph.model.VideoInfo;
 import com.pxyph.service.ADService;
 import com.pxyph.util.tag.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,21 +43,21 @@ public class SysSettingController {
             String[] idArray = ids.split(",");
             for (String id : idArray) {
 
-                SysSetting sysSetting = adService.findSysSettingById(Integer.parseInt(id));
-                File[] videoFiles = new File(VIDEOPATH).listFiles();
-                for (File file : videoFiles) {
-                    System.out.println(file.getAbsolutePath());
-                    System.out.println(file.getName());
-                    if (file.getName().equals(sysSetting.getVideo())) {
-                        file.getAbsoluteFile().delete();
-                    }
-                }
-                File[] modelFiles = new File(MODELPATH).listFiles();
-                for (File file : modelFiles) {
-                    if (file.getName().equals(sysSetting.getModel())) {
-                        file.getAbsoluteFile().delete();
-                    }
-                }
+                //SysSetting sysSetting = adService.findSysSettingById(Integer.parseInt(id));
+                //File[] videoFiles = new File(VIDEOPATH).listFiles();
+                //for (File file : videoFiles) {
+                //    System.out.println(file.getAbsolutePath());
+                //    System.out.println(file.getName());
+                //    if (file.getName().equals(sysSetting.getVideo())) {
+                //        file.getAbsoluteFile().delete();
+                //    }
+                //}
+                //File[] modelFiles = new File(MODELPATH).listFiles();
+                //for (File file : modelFiles) {
+                //    if (file.getName().equals(sysSetting.getModel())) {
+                //        file.getAbsoluteFile().delete();
+                //    }
+                //}
 
                 // 根据id删除配置
                 adService.removeSysSettingById(Integer.parseInt(id));
@@ -100,11 +101,13 @@ public class SysSettingController {
             System.out.println(videoPath);
             //上传的视频文件名、模型文件名
             String videoName = sysSetting.getVideofile().getOriginalFilename();
+            VideoInfo videoInfo = adService.findVideoInfoByFileName(videoName);
+            sysSetting.setVideo_id(videoInfo.getVideo_id());
             String modelName = sysSetting.getModelfile().getOriginalFilename();
 
             //将上传路径保存到一个目标文件中
-            sysSetting.getVideofile().transferTo(new File(videoPath + File.separator + videoName));
-            sysSetting.getModelfile().transferTo(new File(modelPath + File.separator + modelName));
+            //sysSetting.getVideofile().transferTo(new File(videoPath + File.separator + videoName));
+            //sysSetting.getModelfile().transferTo(new File(modelPath + File.separator + modelName));
 
             //设置video_id和model
             sysSetting.setVideo(videoName);
@@ -273,12 +276,13 @@ public class SysSettingController {
         if (pageIndex != null) {
             pageModel.setPageIndex(pageIndex);
         }
-        System.out.println(keys + "123");
         if (keys == null) {
             //将session的值设定为null
             session.setAttribute("keys", null);
             /** 查询配置信息     */
             List<SysSetting> sysSettings = adService.findSysSettingByKeys(sysSetting, pageModel);
+            //String video_id = sysSettings.get(0).getVideo_id();
+            //VideoInfo videoInfo = adService.findVideoInfoByVideoId(video_id);
             model.addAttribute("sysSettings", sysSettings);
             model.addAttribute("pageModel", pageModel);
             return "setting/setting";

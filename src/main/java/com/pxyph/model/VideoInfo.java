@@ -16,6 +16,9 @@ public class VideoInfo implements Serializable {
     private Integer frame_num;
     private Integer fps;
     private String video_path;
+    private String event_type;
+    private int start_time;
+    private int end_time;
 
     public VideoInfo() {
         super();
@@ -93,6 +96,29 @@ public class VideoInfo implements Serializable {
         this.video_path = video_path;
     }
 
+    public String getEvent_type() {
+        return event_type;
+    }
+
+    public void setEvent_type(String event_type) {
+        this.event_type = event_type;
+    }
+
+    public int getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(int start_time) {
+        this.start_time = start_time;
+    }
+
+    public int getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(int end_time) {
+        this.end_time = end_time;
+    }
 
     @Override
     public String toString() {
@@ -106,6 +132,9 @@ public class VideoInfo implements Serializable {
                 ", frame_num=" + frame_num +
                 ", fps=" + fps +
                 ", video_path='" + video_path + '\'' +
+                ", event_type='" + event_type + '\'' +
+                ", start_time=" + start_time +
+                ", end_time=" + end_time +
                 '}';
     }
 }

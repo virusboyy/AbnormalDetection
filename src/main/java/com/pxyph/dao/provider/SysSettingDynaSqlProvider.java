@@ -23,6 +23,9 @@ public class SysSettingDynaSqlProvider {
                 if (sysSetting.getInput_type() != null && !sysSetting.getInput_type().equals("")) {
                     VALUES("input_type", "#{input_type}");
                 }
+                if (sysSetting.getVideo_id() != null && !sysSetting.getVideo_id().equals("")) {
+                    VALUES("video_id", "#{video_id}");
+                }
                 if (sysSetting.getVideo() != null && !sysSetting.getVideo().equals("")) {
                     VALUES("video", "#{video}");
                 }
@@ -50,6 +53,9 @@ public class SysSettingDynaSqlProvider {
                 UPDATE(SYSSETTING);
                 if (sysSetting.getInput_type() != null) {
                     SET(" input_type = #{input_type} ");
+                }
+                if (sysSetting.getVideo_id() != null) {
+                    SET(" video_id = #{video_id} ");
                 }
                 if (sysSetting.getVideo() != null) {
                     SET(" video = #{video} ");
@@ -82,9 +88,9 @@ public class SysSettingDynaSqlProvider {
                     if (sysSetting.getUsername() != null && !sysSetting.getUsername().equals("")) {
                         WHERE(" username LIKE CONCAT ('%',#{sysSetting.username},'%')");
                     }
-                    if (sysSetting.getInput_type() != null && !sysSetting.getInput_type().equals("")) {
-                        WHERE(" input_type LIKE CONCAT ('%',#{sysSetting.input_type},'%')");
-                    }
+                    //if (sysSetting.getInput_type() != null && !sysSetting.getInput_type().equals("")) {
+                    //    WHERE(" input_type LIKE CONCAT ('%',#{sysSetting.input_type},'%')");
+                    //}
                 }
                 ORDER_BY("id");
             }
@@ -108,9 +114,9 @@ public class SysSettingDynaSqlProvider {
                     if (sysSetting.getUsername() != null && !sysSetting.getUsername().equals("")) {
                         WHERE(" username LIKE CONCAT ('%',#{sysSetting.username},'%')");
                     }
-                    if (sysSetting.getInput_type() != null && !sysSetting.getInput_type().equals("")) {
-                        WHERE(" input_type LIKE CONCAT ('%',#{sysSetting.input_type},'%')");
-                    }
+                    //if (sysSetting.getInput_type() != null && !sysSetting.getInput_type().equals("")) {
+                    //    WHERE(" input_type LIKE CONCAT ('%',#{sysSetting.input_type},'%')");
+                    //}
                 }
             }
         }.toString();

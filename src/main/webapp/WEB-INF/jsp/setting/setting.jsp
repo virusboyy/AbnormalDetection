@@ -188,25 +188,27 @@
                     <td><input type="checkbox" name="checkAll" id="checkAll"></td>
                     <td>输入类型</td>
                     <td>视频id</td>
+                    <td>视频名</td>
                     <td>存储路径</td>
                     <td>模型路径</td>
                     <td>播放设置</td>
                     <td>用户信息</td>
-                    <td align="center">操作</td>
+                    <%--<td align="center">操作</td>--%>
                 </tr>
                 <c:forEach items="${requestScope.sysSettings}" var="setting" varStatus="stat">
                     <tr id="data_${stat.index}" align="center" class="main_trbg" onMouseOver="move(this);"
                         onMouseOut="out(this);">
                         <td><input type="checkbox" id="box_${stat.index}" value="${setting.id}"></td>
                         <td>${setting.input_type }</td>
+                        <td>${setting.video_id}</td>
                         <td>${setting.video }</td>
                         <td>${setting.save_path }</td>
                         <td>${setting.model }</td>
                         <td>${setting.play_set }</td>
                         <td>${setting.username}</td>
-                        <td align="center" width="40px;"><a id="settingAID" href="${ctx}/setting/updateSetting?flag=1&id=${setting.id}">
-                            <img title="修改" src="${ctx}/images/update.gif"/></a>
-                        </td>
+                        <%--<td align="center" width="40px;"><a id="settingAID" href="${ctx}/setting/updateSetting?flag=1&id=${setting.id}">--%>
+                            <%--<img title="修改" src="${ctx}/images/update.gif"/></a>--%>
+                        <%--</td>--%>
                     </tr>
                 </c:forEach>
             </table>
