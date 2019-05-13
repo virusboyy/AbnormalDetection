@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -134,11 +137,21 @@ public class AnomalyDetectionController {
      * @param video_name
      * @return 异常信息对象
      */
-    public AbnormalInfo anomalyDetectionModel(String video_name) {
+    public AbnormalInfo anomalyDetectionModel(String video_name) throws IOException, InterruptedException {
         /**
          * 机器学习算法，进行异常行为检测
          */
-
+        String exe = "python3";
+        String command = "AnomalyDetectionDemo.py";
+        String argv1 = "weights_L1L2.mat";
+        String argv2 = "model.json";
+        String[] cmdArr = new String[]{exe,command,argv1,argv2};
+        Process process = Runtime.getRuntime().exec(cmdArr);
+        InputStream is = process.getInputStream();
+        DataInputStream dis = new DataInputStream(is);
+        String str = dis.readLine();
+        process.waitFor();
+        System.out.println(str);
         return null;
     }
 
