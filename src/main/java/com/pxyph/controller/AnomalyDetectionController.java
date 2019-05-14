@@ -33,6 +33,7 @@ public class AnomalyDetectionController {
     public String selectAllLogInfo(Model model, HttpSession session, HttpServletRequest request) {
         User user = (User) session.getAttribute(USER_SESSION);
 
+
         /**
          * 异常检测开始接口
          */
