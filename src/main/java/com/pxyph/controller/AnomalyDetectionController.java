@@ -133,8 +133,6 @@ public class AnomalyDetectionController {
     /**
      * 调用机器学习算法进行异常行为检测，并返回异常信息对象
      */
-    @RequestMapping(value = "/abnormal/anomalyDetectionModel")
-    @ResponseBody
     public AbnormalInfo anomalyDetectionModel(
             LogInfo logInfo,
             SysSetting sysSetting,
@@ -143,12 +141,17 @@ public class AnomalyDetectionController {
          * 机器学习算法，进行异常行为检测
          */
         if (tag.equals("开始") || tag.equals("继续")) {
-            String exe = "python3";
-            String command = "/home/panhu/Desktop/AnomalyDetection/Demo.py";
+            String exe = PYTHON;
+            String command = COMMOND;
+            String weights = sysSetting.getWeights();
             String model = sysSetting.getModel();
-            String argv1 = "weights_L1L2.mat";
-            String argv2 = "model.json";
-            String argv3 = "RoadAccidents022_x264.mp4";
+            String videoName = sysSetting.getVideo();
+            //String argv1 = "weights_L1L2.mat";
+            //String argv2 = "model.json";
+            //String argv3 = "RoadAccidents022_x264.mp4";
+            String argv1 = weights;
+            String argv2 = model;
+            String argv3 = videoName;
             String[] cmdArr = new String[]{exe, command, argv1, argv2, argv3};
             Process process = Runtime.getRuntime().exec(cmdArr);
             InputStream is = process.getInputStream();
@@ -157,6 +160,9 @@ public class AnomalyDetectionController {
             str = str.substring(1, str.length() - 1);
             process.waitFor();
             String[] strs = str.split(",");
+            if (strs==null){
+                return null;
+            }
             int end = 0;
             for (int i = 0; i < strs.length - 1; ) {
                 String video_id = sysSetting.getVideo_id();

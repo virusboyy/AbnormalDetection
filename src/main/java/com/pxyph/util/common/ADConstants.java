@@ -21,6 +21,9 @@ public class ADConstants {
 	//存储设置的id
 	public static final String SETTINGID = "settingId";
 
+	public static final String PYTHON = "python3";
+	public static final String COMMOND = "/home/panhu/Desktop/AnomalyDetection/Demo.py";
+
 	//默认设置id
 	public static final String DEFAULTSETTINGID = "1";
 
