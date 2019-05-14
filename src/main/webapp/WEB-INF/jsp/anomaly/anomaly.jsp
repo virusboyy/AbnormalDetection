@@ -83,6 +83,7 @@
                     myVideo.play();
                 }
             )
+
         })
     </script>
 </head>

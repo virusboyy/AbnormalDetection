@@ -103,6 +103,7 @@ public class SysSettingController {
             String videoName = sysSetting.getVideofile().getOriginalFilename();
             VideoInfo videoInfo = adService.findVideoInfoByFileName(videoName);
             sysSetting.setVideo_id(videoInfo.getVideo_id());
+            String weightsName = sysSetting.getWeightsFile().getOriginalFilename();
             String modelName = sysSetting.getModelfile().getOriginalFilename();
 
             //将上传路径保存到一个目标文件中
@@ -111,6 +112,7 @@ public class SysSettingController {
 
             //设置video_id和model
             sysSetting.setVideo(videoName);
+            sysSetting.setWeights(weightsName);
             sysSetting.setModel(modelName);
 
             //添加用户信息

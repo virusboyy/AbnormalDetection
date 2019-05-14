@@ -90,6 +90,10 @@
                                                                        size="40"/></td>
                                 </tr>
                                 <tr>
+                                    <td class="font3 fftd">所选权重：<input type="file" name="weightsFile" id="weightsFile"
+                                                                       size="30"/></td>
+                                </tr>
+                                <tr>
                                     <td class="font3 fftd">所选模型：<input type="file" name="modelfile" id="modelfile"
                                                                        size="30"/></td>
                                 </tr>
@@ -107,7 +111,7 @@
 
                     <tr>
                         <td align="left" class="fftd">
-                            <input type="submit" value="修改">&nbsp;&nbsp;
+                            <input type="submit" value="添加">&nbsp;&nbsp;
                             <input type="button" id="query" value="取消">
                         </td>
                     </tr>

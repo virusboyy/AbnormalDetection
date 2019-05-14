@@ -54,12 +54,12 @@ public class AnomalyDetectionController {
         String video = null;
 
         //从session中取出id
-        if ((String) session.getAttribute(SETTINGID)!=null&&!"".equals((String) session.getAttribute(SETTINGID))){
+        if ((String) session.getAttribute(SETTINGID) != null && !"".equals((String) session.getAttribute(SETTINGID))) {
             ids = (String) session.getAttribute(SETTINGID);
             int id = Integer.parseInt(ids);
             SysSetting sysSetting = adService.findSysSettingById(id);
             video = sysSetting.getVideo();
-        }else {
+        } else {
             DefaultSetting defaultSetting = adService.findDefaultSettingById(Integer.parseInt(ids));
             String video_id = defaultSetting.getVideo_id();
             VideoInfo videoInfo = adService.findVideoInfoByVideoId(video_id);
@@ -102,10 +102,10 @@ public class AnomalyDetectionController {
         //从session中取出id
         String ids = null;
         SysSetting sysSetting = new SysSetting();
-        if ((String) session.getAttribute(SETTINGID)!=null&&!"".equals((String) session.getAttribute(SETTINGID))){
+        if ((String) session.getAttribute(SETTINGID) != null && !"".equals((String) session.getAttribute(SETTINGID))) {
             ids = (String) session.getAttribute(SETTINGID);
             sysSetting = adService.findSysSettingById(Integer.parseInt(ids));
-        }else {
+        } else {
             ids = DEFAULTSETTINGID;
             DefaultSetting defaultSetting = adService.findDefaultSettingById(Integer.parseInt(ids));
             sysSetting.setInput_type(defaultSetting.getInput_type());
@@ -130,34 +130,69 @@ public class AnomalyDetectionController {
     }
 
 
-
     /**
      * 调用机器学习算法进行异常行为检测，并返回异常信息对象
-     *
-     * @param video_name
-     * @return 异常信息对象
      */
-    public AbnormalInfo anomalyDetectionModel(String video_name) throws IOException, InterruptedException {
+    @RequestMapping(value = "/abnormal/anomalyDetectionModel")
+    @ResponseBody
+    public AbnormalInfo anomalyDetectionModel(
+            LogInfo logInfo,
+            SysSetting sysSetting,
+            String tag) throws IOException, InterruptedException {
         /**
          * 机器学习算法，进行异常行为检测
          */
-        String exe = "python3";
-        String command = "AnomalyDetectionDemo.py";
-        String argv1 = "weights_L1L2.mat";
-        String argv2 = "model.json";
-        String[] cmdArr = new String[]{exe,command,argv1,argv2};
-        Process process = Runtime.getRuntime().exec(cmdArr);
-        InputStream is = process.getInputStream();
-        DataInputStream dis = new DataInputStream(is);
-        String str = dis.readLine();
-        process.waitFor();
-        System.out.println(str);
+        if (tag.equals("开始") || tag.equals("继续")) {
+            String exe = "python3";
+            String command = "/home/panhu/Desktop/AnomalyDetection/Demo.py";
+            String model = sysSetting.getModel();
+            String argv1 = "weights_L1L2.mat";
+            String argv2 = "model.json";
+            String argv3 = "RoadAccidents022_x264.mp4";
+            String[] cmdArr = new String[]{exe, command, argv1, argv2, argv3};
+            Process process = Runtime.getRuntime().exec(cmdArr);
+            InputStream is = process.getInputStream();
+            DataInputStream dis = new DataInputStream(is);
+            String str = dis.readLine();
+            str = str.substring(1, str.length() - 1);
+            process.waitFor();
+            String[] strs = str.split(",");
+            int end = 0;
+            for (int i = 0; i < strs.length - 1; ) {
+                String video_id = sysSetting.getVideo_id();
+                VideoInfo videoInfo = adService.findVideoInfoByVideoId(video_id);
+                //int start_time = videoInfo.getStart_time();
+                int start_time = Integer.parseInt(strs[i++].trim()) * 1000 / 30;
+                Thread.sleep(start_time - end);
+                logInfo.setEvent_type(videoInfo.getEvent_type());
+                logInfo.setCreate_time(new Date());
+                logInfo.setLog_document("视频" + videoInfo.getFile_name() + "在" + start_time + "微秒中处出现了" + videoInfo.getEvent_type());
+                adService.addLogInfo(logInfo);
+
+                //int end_time = videoInfo.getEnd_time();
+                int end_time = Integer.parseInt(strs[i++].trim()) * 1000 / 30;
+                Thread.sleep(end_time - start_time);
+                end = end_time;
+                logInfo.setCreate_time(new Date());
+                logInfo.setLog_document("视频" + videoInfo.getFile_name() + "在" + end_time + "微秒中处结束了" + videoInfo.getEvent_type());
+                adService.addLogInfo(logInfo);
+                //VideoInfo video = adService.findVideoInfoByFileName(sysSetting.getVideo());
+
+                //添加异常信息
+                addAbnormalInfo(sysSetting, videoInfo, start_time, end_time);
+
+                //添加存储信息
+                addStorageManager(sysSetting, videoInfo);
+
+            }
+
+        }
         return null;
     }
 
     private void addStorageManager(SysSetting sysSetting, VideoInfo video) {
         StorageManager storageInfoByVideoId = adService.findStorageInfoByVideoId(video.getVideo_id());
-        if (storageInfoByVideoId==null) {
+        if (storageInfoByVideoId == null) {
             StorageManager storageManager = new StorageManager();
             storageManager.setVideo_id(video.getVideo_id());
             storageManager.setFile_name(video.getFile_name());
@@ -209,7 +244,7 @@ public class AnomalyDetectionController {
             @ModelAttribute AbnormalInfo abnormalInfo
     ) {
         List<AbnormalInfo> abnormalInfos = adService.findAbnormalInfoByKeys(abnormalInfo, pageModel);
-        abnormalInfos.get(0).setVideo_path(abnormalInfos.get(0).getVideo_path()+"/"+abnormalInfos.get(0).getVideo_name());
+        abnormalInfos.get(0).setVideo_path(abnormalInfos.get(0).getVideo_path() + "/" + abnormalInfos.get(0).getVideo_name());
         return abnormalInfos;
     }
 
@@ -218,7 +253,7 @@ public class AnomalyDetectionController {
         if (tag.equals("开始") || tag.equals("继续")) {
             String video_id = sysSetting.getVideo_id();
             VideoInfo videoInfo = adService.findVideoInfoByVideoId(video_id);
-            if (videoInfo.getStart_time()!=0&&videoInfo.getEnd_time()!=0) {
+            if (videoInfo.getStart_time() != 0 && videoInfo.getEnd_time() != 0) {
                 int start_time = videoInfo.getStart_time();
                 Thread.sleep(start_time / 1000);
                 logInfo.setEvent_type(videoInfo.getEvent_type());

@@ -32,6 +32,9 @@ public class SysSettingDynaSqlProvider {
                 if (sysSetting.getSave_path() != null && !"".equals(sysSetting.getSave_path())) {
                     VALUES("save_path", "#{save_path}");
                 }
+                if (sysSetting.getWeights() != null && !"".equals(sysSetting.getWeights())) {
+                    VALUES("weights", "#{weights}");
+                }
                 if (sysSetting.getModel() != null && !"".equals(sysSetting.getModel())) {
                     VALUES("model", "#{model}");
                 }
@@ -62,6 +65,9 @@ public class SysSettingDynaSqlProvider {
                 }
                 if (sysSetting.getSave_path() != null&&!"".equals(sysSetting.getSave_path())) {
                     SET(" save_path = #{save_path} ");
+                }
+                if (sysSetting.getWeights() != null&&!"".equals(sysSetting.getWeights())) {
+                    SET(" weights = #{weights} ");
                 }
                 if (sysSetting.getModel() != null&&!"".equals(sysSetting.getModel())) {
                     SET(" model = #{model} ");

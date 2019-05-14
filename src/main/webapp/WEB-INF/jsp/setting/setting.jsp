@@ -190,6 +190,7 @@
                     <td>视频id</td>
                     <td>视频名</td>
                     <td>存储路径</td>
+                    <td>权重路径</td>
                     <td>模型路径</td>
                     <td>播放设置</td>
                     <td>用户信息</td>
@@ -203,6 +204,7 @@
                         <td>${setting.video_id}</td>
                         <td>${setting.video }</td>
                         <td>${setting.save_path }</td>
+                        <td>${setting.weights }</td>
                         <td>${setting.model }</td>
                         <td>${setting.play_set }</td>
                         <td>${setting.username}</td>

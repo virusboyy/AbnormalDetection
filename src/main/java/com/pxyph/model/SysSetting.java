@@ -14,6 +14,8 @@ public class SysSetting  implements Serializable {
     private String video;//视频文件名
     private MultipartFile videofile; //视频文件
     private String save_path;//存储路径
+    private String weights; //模型权重
+    private MultipartFile weightsFile;//权重文件
     private String model;//模型文件名
     private MultipartFile modelfile;//模型文件
     private Integer play_set;//播放设置
@@ -72,6 +74,22 @@ public class SysSetting  implements Serializable {
         this.save_path = save_path;
     }
 
+    public String getWeights() {
+        return weights;
+    }
+
+    public void setWeights(String weights) {
+        this.weights = weights;
+    }
+
+    public MultipartFile getWeightsFile() {
+        return weightsFile;
+    }
+
+    public void setWeightsFile(MultipartFile weightsFile) {
+        this.weightsFile = weightsFile;
+    }
+
     public String getModel() {
         return model;
     }
@@ -114,6 +132,8 @@ public class SysSetting  implements Serializable {
                 ", video='" + video + '\'' +
                 ", videofile=" + videofile +
                 ", save_path='" + save_path + '\'' +
+                ", weights='" + weights + '\'' +
+                ", weightsFile=" + weightsFile +
                 ", model='" + model + '\'' +
                 ", modelfile=" + modelfile +
                 ", play_set=" + play_set +

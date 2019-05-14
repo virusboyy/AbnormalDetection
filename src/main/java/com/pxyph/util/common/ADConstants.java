@@ -12,11 +12,12 @@ public class ADConstants {
 	public static final String ABNORMALINFO = "abnormal_info";
 
 	//视频存储路径
-	public static final String VIDEOPATH = "D:\\IdeaProjects\\AbnormalDetection\\src\\main\\webapp\\video";
+	//public static final String VIDEOPATH = "D:\\IdeaProjects\\AbnormalDetection\\src\\main\\webapp\\video";
+	public static final String VIDEOPATH = "/home/panhu/Desktop/video";
 	public static final String VIDEO_REFERENCE = "/video";
 	//模型存储路径
-	public static final String MODELPATH = "D:\\IdeaProjects\\AbnormalDetection\\src\\main\\webapp\\model";
-	public static final String MODEL_REFERENCE = "\\model";
+	public static final String MODELPATH = "/home/panhu/Desktop/model";
+	public static final String MODEL_REFERENCE = "/model";
 	//存储设置的id
 	public static final String SETTINGID = "settingId";
 

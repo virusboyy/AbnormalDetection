@@ -12,6 +12,7 @@ public class DefaultSetting implements Serializable {
     private String input_type;//输入类型
     private String video_id;//视频id
     private String save_path;//存储路径
+    private String weights; //模型权重
     private String model;//模型路径
     private Integer play_set;//播放设置
 
@@ -22,6 +23,7 @@ public class DefaultSetting implements Serializable {
                 ", input_type='" + input_type + '\'' +
                 ", video_id='" + video_id + '\'' +
                 ", save_path='" + save_path + '\'' +
+                ", weights='" + weights + '\'' +
                 ", model='" + model + '\'' +
                 ", play_set=" + play_set +
                 '}';
@@ -62,6 +64,14 @@ public class DefaultSetting implements Serializable {
 
     public void setSave_path(String save_path) {
         this.save_path = save_path;
+    }
+
+    public String getWeights() {
+        return weights;
+    }
+
+    public void setWeights(String weights) {
+        this.weights = weights;
     }
 
     public String getModel() {
