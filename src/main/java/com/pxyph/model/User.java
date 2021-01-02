@@ -14,7 +14,7 @@ public class User implements Serializable {
 	private String password;	// 密码
 	private Integer userstatus;		// 状态
 	
-	private Date createDate;	// 建档日期
+	private Date create_date;	// 建档日期
 	// 无参数构造器
 	public User() {
 		super();
@@ -53,16 +53,16 @@ public class User implements Serializable {
 		this.userstatus = userstatus;
 	}
 	public Date getCreateDate() {
-		return createDate;
+		return create_date;
 	}
 	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+		this.create_date = create_date;
 	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", loginname="
 				+ loginname + ", password=" + password + ", userstatus=" + userstatus
-				+ ", createDate=" + createDate + "]";
+				+ ", create_date=" + create_date + "]";
 	}
 	
 	

@@ -94,9 +94,9 @@ public class SysSettingDynaSqlProvider {
                     if (sysSetting.getUsername() != null && !"".equals(sysSetting.getUsername())) {
                         WHERE(" username LIKE CONCAT ('%',#{sysSetting.username},'%')");
                     }
-                    //if (sysSetting.getInput_type() != null && !sysSetting.getInput_type().equals("")) {
-                    //    WHERE(" input_type LIKE CONCAT ('%',#{sysSetting.input_type},'%')");
-                    //}
+                    if (sysSetting.getInput_type() != null && !sysSetting.getInput_type().equals("")) {
+                        WHERE(" input_type LIKE CONCAT ('%',#{sysSetting.input_type},'%')");
+                    }
                 }
                 ORDER_BY("id");
             }

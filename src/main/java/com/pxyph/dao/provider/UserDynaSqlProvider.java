@@ -95,9 +95,6 @@ public class UserDynaSqlProvider {
                 if (user.getUserstatus() != null) {
                     SET(" userstatus = #{userstatus} ");
                 }
-                if (user.getCreateDate() != null) {
-                    SET(" create_date = #{createDate} ");
-                }
                 WHERE(" id = #{id} ");
             }
         }.toString();

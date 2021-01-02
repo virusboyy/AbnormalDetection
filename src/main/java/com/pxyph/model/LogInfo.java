@@ -10,6 +10,9 @@ public class LogInfo implements Serializable {
     private String event_type;
     private Date create_time;
     private String transfer_time;
+    private String log_document;
+    private String username;
+
 
     public String getLog_document() {
         return log_document;
@@ -26,11 +29,6 @@ public class LogInfo implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-
-    private String log_document;
-    private String username;
-
-
 
 
     public LogInfo() {
