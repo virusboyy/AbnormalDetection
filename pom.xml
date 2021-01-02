@@ -34,7 +34,7 @@
         <!-- log4j日志包版本号 -->
         <slf4j.version>1.7.18</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
-        <junit.version>4.11</junit.version>
+        <junit.version>4.13.1</junit.version>
         <jstl.version>1.2</jstl.version>
 
         <jackson-databind.version>2.9.8</jackson-databind.version>
