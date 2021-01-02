@@ -27,7 +27,7 @@
         <mybatis-spring.version>1.3.1</mybatis-spring.version>
 
         <!-- mysql驱动版本号 -->
-        <mysql-driver.version>5.1.44</mysql-driver.version>
+        <mysql-driver.version>8.0.16</mysql-driver.version>
 
         <aspectjweaver.version>1.8.4</aspectjweaver.version>
 
