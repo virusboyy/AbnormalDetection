@@ -37,7 +37,7 @@
         <junit.version>4.11</junit.version>
         <jstl.version>1.2</jstl.version>
 
-        <jackson-databind.version>2.9.8</jackson-databind.version>
+        <jackson-databind.version>2.9.10.8</jackson-databind.version>
         <jackson-core.version>2.9.8</jackson-core.version>
         <jackson-annotations.version>2.9.8</jackson-annotations.version>
 
