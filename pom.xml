@@ -51,7 +51,7 @@
         <pagehelper.version>5.1.2</pagehelper.version>
 
         <!--java连接python-->
-        <jython.version>2.7.0</jython.version>
+        <jython.version>2.7.2</jython.version>
         <jython-standalone.version>2.7.0</jython-standalone.version>
     </properties>
 
