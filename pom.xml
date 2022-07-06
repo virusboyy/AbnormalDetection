@@ -52,7 +52,7 @@
 
         <!--java连接python-->
         <jython.version>2.7.0</jython.version>
-        <jython-standalone.version>2.7.0</jython-standalone.version>
+        <jython-standalone.version>2.7.1</jython-standalone.version>
     </properties>
 
     <dependencies>
